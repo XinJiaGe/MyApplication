@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.adaptation.lixinjia.myapplication.R;
+import com.zhy.autolayout.AutoLinearLayout;
 
 /**
  * 作者：李忻佳
@@ -17,7 +18,7 @@ import com.adaptation.lixinjia.myapplication.R;
  * 说明：TitleView
  */
 
-public class TitleView extends LinearLayout{
+public class TitleView extends AutoLinearLayout{
     private LinearLayout back;
     private LinearLayout center;
     private LinearLayout right;
@@ -74,7 +75,8 @@ public class TitleView extends LinearLayout{
         center.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onCenterListener();
+                if(fastClick())
+                    listener.onCenterListener();
             }
         });
     }
@@ -86,7 +88,19 @@ public class TitleView extends LinearLayout{
     public void setBackOnClickListener(OnBackClickListener listener){
         this.mOnBackClickListener = listener;
     }
-
+    /**
+     * 防止快速点击
+     *
+     * @return
+     */
+    private boolean fastClick() {
+        long lastClick = 0;
+        if (System.currentTimeMillis() - lastClick <= 1000) {
+            return false;
+        }
+        lastClick = System.currentTimeMillis();
+        return true;
+    }
     public OnBackClickListener getmOnBackClickListener() {
         return mOnBackClickListener;
     }

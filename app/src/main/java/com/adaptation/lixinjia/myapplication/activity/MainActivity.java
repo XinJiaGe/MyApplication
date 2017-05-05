@@ -48,6 +48,9 @@ public class MainActivity extends BaseActivity {
                     case 2:
                         startActivity(NativeFingerprintIdentificationActivity.class);
                         break;
+                    case 3:
+                        startActivity(GameSurfaceActivity.class);
+                        break;
                 }
             }
         });
@@ -66,6 +69,7 @@ public class MainActivity extends BaseActivity {
         list.add("适配屏幕");
         list.add("魅族指纹识别");
         list.add("原生指纹识别");
+        list.add("SurfaceView");
         MainAdapter adapter = new MainAdapter(list,mActivity);
         horizontal.setALine(false);
         horizontal.setAdapter(adapter);

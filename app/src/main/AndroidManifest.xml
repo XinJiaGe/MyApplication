@@ -29,5 +29,6 @@
         <activity android:name=".activity.ScreenAdaptationActivity"/>
         <activity android:name=".activity.MeiZuFingerprintIdentificationActivity"/>
         <activity android:name=".activity.NativeFingerprintIdentificationActivity"/>
+        <activity android:name=".activity.GameSurfaceActivity" android:screenOrientation="landscape"/>
     </application>
 </manifest>

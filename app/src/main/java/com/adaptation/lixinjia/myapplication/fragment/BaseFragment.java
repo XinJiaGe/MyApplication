@@ -1,13 +1,15 @@
 package com.adaptation.lixinjia.myapplication.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * 作者：李忻佳
@@ -19,6 +21,8 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     protected final String TAG = this.getClass().getSimpleName();
     private View mContextView = null;
     protected FragmentActivity mActivity;
+    private Toast mToast;
+    private Handler mHandler = new Handler(Looper.getMainLooper());
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -97,4 +101,34 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         lastClick = System.currentTimeMillis();
         return true;
     }
+
+    /**
+     * 打印LOG D
+     * @param msg
+     */
+    protected void LogD(String msg){
+        Log.d(TAG,msg);
+    }
+
+    /**
+     * 简化Toast
+     */
+    protected void showToast(String messageId){
+        if (mToast == null) {
+            mToast = Toast.makeText(mActivity, messageId, Toast.LENGTH_SHORT);
+        }
+        mToast.setText(messageId);
+        mToast.cancel();
+        mHandler.removeCallbacks(mShowToastRunnable);
+        mHandler.postDelayed(mShowToastRunnable, 0);
+    }
+    /**
+     * show Toast
+     */
+    private Runnable mShowToastRunnable = new Runnable() {
+        @Override
+        public void run() {
+            mToast.show();
+        }
+    };
 }

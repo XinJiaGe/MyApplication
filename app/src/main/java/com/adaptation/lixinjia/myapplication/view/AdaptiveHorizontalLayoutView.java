@@ -8,13 +8,15 @@ import android.view.ViewTreeObserver;
 import android.widget.Adapter;
 import android.widget.LinearLayout;
 
+import com.zhy.autolayout.AutoLinearLayout;
+
 /**
  * 作者：李忻佳.
  * 时间：2017/2/22.
  * 说明：自适应horizontal布局View
  */
 
-public class AdaptiveHorizontalLayoutView extends LinearLayout {
+public class AdaptiveHorizontalLayoutView extends AutoLinearLayout {
     private Context mContext;
     private int startIndex = 0;
     private int endIndex = 0;
@@ -92,7 +94,8 @@ public class AdaptiveHorizontalLayoutView extends LinearLayout {
                 v.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        mListener.onClick(finalI,v);
+                        if(fastClick())
+                            mListener.onClick(finalI,v);
                     }
                 });
             }
@@ -116,6 +119,19 @@ public class AdaptiveHorizontalLayoutView extends LinearLayout {
                 }
             }
         }
+    }
+    /**
+     * 防止快速点击
+     *
+     * @return
+     */
+    private boolean fastClick() {
+        long lastClick = 0;
+        if (System.currentTimeMillis() - lastClick <= 1000) {
+            return false;
+        }
+        lastClick = System.currentTimeMillis();
+        return true;
     }
     /**
      * 获取控件的宽度

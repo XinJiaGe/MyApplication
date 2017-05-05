@@ -1,20 +1,17 @@
 package com.adaptation.lixinjia.myapplication.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.LayoutRes;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.adaptation.lixinjia.myapplication.R;
@@ -32,6 +29,10 @@ public abstract class BaseActivity extends AutoLayoutActivity implements View.On
     protected Activity mActivity;
     /** 是否沉浸状态栏 **/
     private boolean isSetStatusBar = false;
+    /** 是否无标题 **/
+    private boolean isNotTitle = false;
+    /** 是否无状态栏 **/
+    private boolean isNotStatusBar = false;
     /** 当前Activity渲染的视图View **/
     private View mContextView = null;
     private Toast mToast;
@@ -61,6 +62,9 @@ public abstract class BaseActivity extends AutoLayoutActivity implements View.On
 
     @Override
     public void setContentView(View view) {
+        if(isNotStatusBar) {//是否显示状态栏
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
         View VaseView = getLayoutInflater().inflate(R.layout.act_base, null);
         //设置填充act_base布局
         super.setContentView(VaseView);
@@ -68,12 +72,16 @@ public abstract class BaseActivity extends AutoLayoutActivity implements View.On
             view.setFitsSystemWindows(true);
         }
         //加载子类Activity的布局
-        FrameLayout titleFrame = (FrameLayout) findViewById(R.id.act_base_title);
+        if(!isNotTitle){//是否显示title
+            //添加title
+            FrameLayout titleFrame = (FrameLayout) findViewById(R.id.act_base_title);
+            mTitle = new TitleView(mActivity);
+            mTitle.getBack().setOnClickListener(this);
+            titleFrame.addView(mTitle);
+        }
+        //添加主布局
         FrameLayout contentView = (FrameLayout) findViewById(R.id.act_base_content);
         contentView.addView(view);
-        mTitle = new TitleView(mActivity);
-        mTitle.getBack().setOnClickListener(this);
-        titleFrame.addView(mTitle);
     }
     @Override
     public void onClick(View v) {
@@ -101,6 +109,16 @@ public abstract class BaseActivity extends AutoLayoutActivity implements View.On
         }
     }
 
+    /**
+     * 横竖屏切换
+     */
+    public void screenSwitch(){
+        if(getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }else{
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+    }
     /**
      * 初始化参数
      *
@@ -231,7 +249,7 @@ public abstract class BaseActivity extends AutoLayoutActivity implements View.On
      * @param msg
      */
     protected void LogD(String msg){
-        Log.d(TAG, msg);
+        Log.d(TAG,msg);
     }
     /**
      * 是否设置沉浸状态栏
@@ -255,7 +273,6 @@ public abstract class BaseActivity extends AutoLayoutActivity implements View.On
         lastClick = System.currentTimeMillis();
         return true;
     }
-
     /**
      * show Toast
      */
@@ -265,4 +282,12 @@ public abstract class BaseActivity extends AutoLayoutActivity implements View.On
             mToast.show();
         }
     };
+
+    public void setNotTitle(boolean notTitle) {
+        isNotTitle = notTitle;
+    }
+
+    public void setNotStatusBar(boolean notStatusBar) {
+        isNotStatusBar = notStatusBar;
+    }
 }
