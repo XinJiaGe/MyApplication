@@ -65,7 +65,7 @@ public class ScreenAdaptationActivity extends BaseActivity {
         list.add("4454.215");
         list.add("625.215");
         list.add("644.215");
-        ScreenAdaptationAdapter adapter = new ScreenAdaptationAdapter(this,list);
+        ScreenAdaptationAdapter adapter = new ScreenAdaptationAdapter(list,this);
         listview.setAdapter(adapter);
     }
 }
