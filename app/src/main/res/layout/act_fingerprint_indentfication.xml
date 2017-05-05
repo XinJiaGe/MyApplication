@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/act_fingerprint_indentfication_startVerify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开始识别"
+        android:textSize="40px"
+        android:padding="20px"
+        android:layout_marginTop="20px"
+        android:gravity="center_horizontal"
+        android:background="@drawable/selector_white_gray"
+        android:textColor="@android:color/black"/>
+    <TextView
+        android:id="@+id/act_fingerprint_indentfication_stopVerify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="取消识别"
+        android:textSize="40px"
+        android:padding="20px"
+        android:layout_marginTop="20px"
+        android:gravity="center_horizontal"
+        android:background="@drawable/selector_white_gray"
+        android:textColor="@android:color/black"/>
+</LinearLayout>
