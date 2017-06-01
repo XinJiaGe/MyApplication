@@ -51,6 +51,12 @@ public class MainActivity extends BaseActivity {
                     case 3:
                         startActivity(GameSurfaceActivity.class);
                         break;
+                    case 4:
+                        startActivity(KotlinActivity.class);
+                        break;
+                    case 5:
+                        startActivity(EventBusText.class);
+                        break;
                 }
             }
         });
@@ -69,7 +75,9 @@ public class MainActivity extends BaseActivity {
         list.add("适配屏幕");
         list.add("魅族指纹识别");
         list.add("原生指纹识别");
-        list.add("SurfaceView");
+        list.add("BaseSurfaceView");
+        list.add("Kotlin插件");
+        list.add("EventBus");
         MainAdapter adapter = new MainAdapter(list,mActivity);
         horizontal.setALine(false);
         horizontal.setAdapter(adapter);

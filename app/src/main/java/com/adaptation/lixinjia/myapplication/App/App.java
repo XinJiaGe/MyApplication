@@ -2,6 +2,8 @@ package com.adaptation.lixinjia.myapplication.App;
 
 import android.app.Application;
 
+import com.sunday.eventbus.SDEventManager;
+
 /**
  * 作者：李忻佳
  * 时间：2017/5/4
@@ -30,5 +32,11 @@ public class App extends Application{
 
     private void init() {
         isDebug = true;
+    }
+
+    @Override
+    public void onTerminate() {
+        SDEventManager.unregister(this);
+        super.onTerminate();
     }
 }
