@@ -1,6 +1,5 @@
 package com.adaptation.lixinjia.myapplication.activity;
 
-import android.os.Bundle;
 import android.view.View;
 
 import com.adaptation.lixinjia.myapplication.R;
@@ -55,7 +54,10 @@ public class MainActivity extends BaseActivity {
                         startActivity(KotlinActivity.class);
                         break;
                     case 5:
-                        startActivity(EventBusText.class);
+                        startActivity(KotlinDSLActivity.class);
+                        break;
+                    case 6:
+                        startActivity(EventBusTextActivity.class);
                         break;
                 }
             }
@@ -77,6 +79,7 @@ public class MainActivity extends BaseActivity {
         list.add("原生指纹识别");
         list.add("BaseSurfaceView");
         list.add("Kotlin插件");
+        list.add("Kotlin DSL布局");
         list.add("EventBus");
         MainAdapter adapter = new MainAdapter(list,mActivity);
         horizontal.setALine(false);

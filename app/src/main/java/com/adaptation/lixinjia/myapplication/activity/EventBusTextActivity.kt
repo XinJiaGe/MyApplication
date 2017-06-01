@@ -6,20 +6,20 @@ import com.adaptation.lixinjia.myapplication.event.EnumEventTag
 import com.sunday.eventbus.SDBaseEvent
 import kotlinx.android.synthetic.main.act_event_bus_text.*
 
-class EventBusText : BaseKotlinActivity() {
+class EventBusTextActivity : BaseKotlinActivity() {
     override fun bindLayout(): Int {
         return R.layout.act_event_bus_text
     }
 
-    override fun addListener(): List<View> {
+    override fun addListener(): List<View?> {
         return listOf(ActEventBusTextBt)
     }
 
     override fun widgetClick(view: View?) {
-        if(view == ActEventBusTextBt) startActivity(EventBusTextNext::class.java)
+        if(view == ActEventBusTextBt) startActivity(EventBusTextNextActivity::class.java)
     }
     override fun doView() {
-        mTitle?.setCenterText("EventBusText")
+        mTitle?.setCenterText("EventBusTextActivity")
     }
     override fun doBusiness() {
 

@@ -79,9 +79,9 @@ abstract class BaseKotlinActivity : AutoLayoutActivity(), View.OnClickListener, 
     /**
      * 循环设置点击事件
      */
-    fun setClick(addListener: List<View>) {
+    fun setClick(addListener: List<View?>) {
         for (view in addListener){
-            view.setOnClickListener(this)
+            view?.setOnClickListener(this)
         }
     }
 
@@ -128,7 +128,7 @@ abstract class BaseKotlinActivity : AutoLayoutActivity(), View.OnClickListener, 
     /**
      * 设置监听
      */
-    abstract fun addListener(): List<View>
+    abstract fun addListener(): List<View?>
 
     /**
      * View点击

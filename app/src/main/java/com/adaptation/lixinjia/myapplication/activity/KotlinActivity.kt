@@ -10,7 +10,7 @@ class KotlinActivity : BaseKotlinActivity() {
 
     override fun bindLayout() = R.layout.activity_kotlin
 
-    override fun addListener(): List<View> = listOf(image,holle)
+    override fun addListener(): List<View?> = listOf(image,holle)
 
     override fun widgetClick(view: View?) {
         if (view == image){
