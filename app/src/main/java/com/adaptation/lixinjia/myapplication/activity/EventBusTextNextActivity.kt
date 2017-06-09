@@ -16,7 +16,7 @@ class EventBusTextNextActivity : BaseKotlinActivity() {
     }
 
     override fun doView() {
-        mTitle?.setCenterText("EventBusTextNextActivity")
+        mTitle?.setCenterText("EventBusTextNext")
     }
     override fun widgetClick(view: View?) {
         if(view == ActEventBusTextNextBut) {

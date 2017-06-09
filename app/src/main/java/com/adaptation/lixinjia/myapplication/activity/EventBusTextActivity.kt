@@ -19,7 +19,7 @@ class EventBusTextActivity : BaseKotlinActivity() {
         if(view == ActEventBusTextBt) startActivity(EventBusTextNextActivity::class.java)
     }
     override fun doView() {
-        mTitle?.setCenterText("EventBusTextActivity")
+        mTitle?.setCenterText("EventBusText")
     }
     override fun doBusiness() {
 

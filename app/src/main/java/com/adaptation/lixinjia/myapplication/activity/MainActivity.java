@@ -59,6 +59,9 @@ public class MainActivity extends BaseActivity {
                     case 6:
                         startActivity(EventBusTextActivity.class);
                         break;
+                    case 7:
+                        startActivity(StepActivity.class);
+                        break;
                 }
             }
         });
@@ -81,6 +84,7 @@ public class MainActivity extends BaseActivity {
         list.add("Kotlin插件");
         list.add("Kotlin DSL布局");
         list.add("EventBus");
+        list.add("计步");
         MainAdapter adapter = new MainAdapter(list,mActivity);
         horizontal.setALine(false);
         horizontal.setAdapter(adapter);

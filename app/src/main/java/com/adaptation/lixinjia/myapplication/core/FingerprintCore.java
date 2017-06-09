@@ -37,7 +37,7 @@ public class FingerprintCore {
      */
     public interface IFingerprintResultListener {
         /** 指纹识别成功 */
-        void onAuthenticateSuccess();
+        void onAuthenticateSuccess(FingerprintManager.AuthenticationResult result);
 
         /** 指纹识别失败 */
         void onAuthenticateFailed(int helpId);
@@ -112,10 +112,10 @@ public class FingerprintCore {
         }
     }
 
-    private void notifyAuthenticationSucceeded() {
+    private void notifyAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         Log.d("FingerprintCore","onAuthenticationSucceeded");
         if (null != mFpResultListener && null != mFpResultListener.get()) {
-            mFpResultListener.get().onAuthenticateSuccess();
+            mFpResultListener.get().onAuthenticateSuccess(result);
         }
     }
 
@@ -164,7 +164,7 @@ public class FingerprintCore {
                 @Override
                 public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
                     mState = NONE;
-                    notifyAuthenticationSucceeded();
+                    notifyAuthenticationSucceeded(result);
                 }
             };
         }

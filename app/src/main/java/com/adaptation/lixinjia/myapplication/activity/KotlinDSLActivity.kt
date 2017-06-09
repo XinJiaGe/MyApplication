@@ -31,7 +31,7 @@ class KotlinDSLActivity : BaseKotlinActivity() {
     }
 
     override fun doBusiness() {
-
+        mTitle?.setCenterText("DSL布局")
     }
 
     fun createView(context: Context): View {

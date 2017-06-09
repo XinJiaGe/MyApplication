@@ -1,8 +1,9 @@
-package com.adaptation.lixinjia.myapplication.App;
+package com.adaptation.lixinjia.myapplication.app;
 
 import android.app.Application;
 
 import com.sunday.eventbus.SDEventManager;
+import com.xinjiage.stepdetector.StepDetector;
 
 /**
  * 作者：李忻佳
@@ -32,6 +33,7 @@ public class App extends Application{
 
     private void init() {
         isDebug = true;
+        StepDetector.getInstance().init(this).startStepService();
     }
 
     @Override

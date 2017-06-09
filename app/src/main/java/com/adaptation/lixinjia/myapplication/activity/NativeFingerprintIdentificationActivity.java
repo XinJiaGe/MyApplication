@@ -1,5 +1,6 @@
 package com.adaptation.lixinjia.myapplication.activity;
 
+import android.hardware.fingerprint.FingerprintManager;
 import android.view.View;
 import android.widget.TextView;
 
@@ -98,7 +99,7 @@ public class NativeFingerprintIdentificationActivity extends BaseActivity {
      */
     private FingerprintCore.IFingerprintResultListener mResultListener = new FingerprintCore.IFingerprintResultListener() {
         @Override
-        public void onAuthenticateSuccess() {
+        public void onAuthenticateSuccess(FingerprintManager.AuthenticationResult result) {
             showToast("指纹识别成功");
         }
 
@@ -116,6 +117,7 @@ public class NativeFingerprintIdentificationActivity extends BaseActivity {
         public void onStartAuthenticateResult(boolean isSuccess) {
 
         }
+
     };
 
     @Override

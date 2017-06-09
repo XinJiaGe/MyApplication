@@ -5,7 +5,7 @@ import com.adaptation.lixinjia.myapplication.R
 import kotlinx.android.synthetic.main.activity_kotlin.*
 
 
-class KotlinActivity : BaseKotlinActivity() {
+class KotlinActivity : BaseKotlinActivity()  {
     var stringBuilder = StringBuffer()
 
     override fun bindLayout() = R.layout.activity_kotlin
