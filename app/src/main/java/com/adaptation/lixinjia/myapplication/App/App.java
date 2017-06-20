@@ -12,6 +12,11 @@ import com.xinjiage.stepdetector.StepDetector;
  */
 
 public class App extends Application{
+    // Used to load the 'native-lib' library on application startup.
+    static {
+        System.loadLibrary("native-lib");
+    }
+
     public static boolean isDebug = true;
     private static App mApp;
 

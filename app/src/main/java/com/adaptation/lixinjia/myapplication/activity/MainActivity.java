@@ -16,6 +16,7 @@ import java.util.List;
  */
 
 public class MainActivity extends BaseActivity {
+
     private AdaptiveHorizontalLayoutView horizontal;
 
     @Override
@@ -62,6 +63,9 @@ public class MainActivity extends BaseActivity {
                     case 7:
                         startActivity(StepActivity.class);
                         break;
+                    case 8:
+                        startActivity(CtextActivity.class);
+                        break;
                 }
             }
         });
@@ -85,6 +89,7 @@ public class MainActivity extends BaseActivity {
         list.add("Kotlin DSL布局");
         list.add("EventBus");
         list.add("计步");
+        list.add("C/C++");
         MainAdapter adapter = new MainAdapter(list,mActivity);
         horizontal.setALine(false);
         horizontal.setAdapter(adapter);

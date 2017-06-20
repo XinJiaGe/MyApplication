@@ -30,6 +30,7 @@
         <service
             android:name="com.xinjiage.stepdetector.service.StepCounterService"
             android:label="StepCounterService" />
+
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,7 +48,8 @@
         <activity android:name=".activity.EventBusTextActivity" />
         <activity android:name=".activity.EventBusTextNextActivity" />
         <activity android:name=".activity.KotlinDSLActivity" />
-        <activity android:name=".activity.StepActivity"></activity>
+        <activity android:name=".activity.StepActivity" />
+        <activity android:name=".activity.CtextActivity"></activity>
     </application>
 
 </manifest>
