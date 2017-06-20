@@ -67,6 +67,11 @@ public class StepDetector {
         initType(stepSensorType);
         return this;
     }
+
+    /**
+     * 判断支持计步类型
+     * @param type
+     */
     private void initType(stepSensorType type){
         mSharedPreferences = mApplication.getSharedPreferences(getClass().getName(), Context.MODE_PRIVATE);
         mEditor = mSharedPreferences.edit();
@@ -93,6 +98,9 @@ public class StepDetector {
         mEditor.commit();
     }
 
+    /**
+     * 开启计步服务
+     */
     public void startStepService(){
         if(mApplication == null){
             Log.e("StepDetector","请执行StepDetector.getInstance().init()进行初始化");
@@ -101,18 +109,38 @@ public class StepDetector {
             mApplication.startService(service);
         }
     }
+
+    /**
+     * 设置回调
+     * @param Listener
+     */
     public void setmStepListener(onStepListener Listener){
         this.mStepListener = Listener;
     }
     public interface onStepListener{
         public void onListener(int count,int step);
     }
+
+    /**
+     * 计步类型
+     */
     private enum stepSensorType{
         TYPE_STEP_COUNTER,
         TYPE_STEP_DETECTOR,
         TYPE_ACCELEROMETER
     }
 
+    /**
+     * 是否支持谷歌计步
+     * @return
+     */
+    public boolean isStandByGoogleStep(){
+        if(mSharedPreferences.getInt(stepSensorTypeName,0) == 3){
+            return false;
+        }else{
+            return true;
+        }
+    }
     public String getStepSensorTypeName() {
         return stepSensorTypeName;
     }

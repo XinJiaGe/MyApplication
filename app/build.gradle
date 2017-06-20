@@ -52,6 +52,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/eventbus-1.5-src-modify.jar')
     compile project(':library_stepdetector')
+    compile project(':library_utilcode')
 }
 repositories {
     mavenCentral()

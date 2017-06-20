@@ -1,1 +1,1 @@
-include ':app', ':library_stepdetector'
+include ':app', ':library_stepdetector', ':library_utilcode'

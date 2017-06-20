@@ -9,7 +9,7 @@
 
 extern "C"
 void
-Java_com_adaptation_lixinjia_myapplication_c_CUtile_getCJNI(
+Java_com_adaptation_lixinjia_myapplication_utils_CUtile_getCJNI(
         JNIEnv *env,
         jobject This ) {
     //在c代码里面调用java代码里面的方法
@@ -34,7 +34,7 @@ Java_com_adaptation_lixinjia_myapplication_c_CUtile_getCJNI(
 
 extern "C"
 jstring
-Java_com_adaptation_lixinjia_myapplication_c_CUtile_getJavaJNI(
+Java_com_adaptation_lixinjia_myapplication_utils_CUtile_getJavaJNI(
         JNIEnv *env,
         jobject /*This*/ ) {
     std::string hello = "Java 已经调用 C 方法";

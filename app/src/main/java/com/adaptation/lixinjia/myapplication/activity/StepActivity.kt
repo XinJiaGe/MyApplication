@@ -25,6 +25,8 @@ class StepActivity : BaseKotlinActivity() {
     override fun doBusiness() {
         mTitle?.setCenterText("计步")
 
+        ActStepTvIsStand.setText(when(StepDetector.getInstance().isStandByGoogleStep){true -> "支持自带计步功能" false -> "不支持自带计步功能"})
+
         StepDetector.getInstance().setmStepListener { count, step ->
             if (mStepEventAnim != null) {
                 mStepEventAnim?.cancel()
