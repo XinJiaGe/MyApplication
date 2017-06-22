@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--按钮按下灰色-->
+    <color name="main_color_gary_press">#b3b3b3</color>
+    <!--浅灰-->
+    <color name="light_gray">#f4f4f4</color>
+
+</resources>

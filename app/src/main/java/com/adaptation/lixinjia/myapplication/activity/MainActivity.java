@@ -33,6 +33,11 @@ public class MainActivity extends BaseActivity {
     public void doView() {
         mTitle.setCenterText("我的");
     }
+
+    @Override
+    public void widgetClick(View v) {
+
+    }
     @Override
     public void addListener() {
         horizontal.setOnMyClickListener(new AdaptiveHorizontalLayoutView.onMyClickListener() {
@@ -66,17 +71,13 @@ public class MainActivity extends BaseActivity {
                     case 8:
                         startActivity(CtextActivity.class);
                         break;
+                    case 9:
+                        startActivity(ExpressionActivity.class);
+                        break;
                 }
             }
         });
     }
-
-    @Override
-    public void widgetClick(View v) {
-
-    }
-
-
 
     @Override
     public void doBusiness() {
@@ -90,6 +91,7 @@ public class MainActivity extends BaseActivity {
         list.add("EventBus");
         list.add("计步");
         list.add("C/C++");
+        list.add("表情");
         MainAdapter adapter = new MainAdapter(list,mActivity);
         horizontal.setALine(false);
         horizontal.setAdapter(adapter);

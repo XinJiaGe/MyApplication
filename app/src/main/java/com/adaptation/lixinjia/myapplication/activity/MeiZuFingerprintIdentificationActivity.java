@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.adaptation.lixinjia.myapplication.R;
 import com.adaptation.lixinjia.myapplication.utils.FingerprintUtil;
+import com.blankj.utilcode.util.LogUtils;
 import com.fingerprints.service.FingerprintManager;
 
 
@@ -61,7 +62,7 @@ public class MeiZuFingerprintIdentificationActivity extends BaseActivity {
     }
 
     public void startVerify() {
-        LogD("开始识别");
+        LogUtils.d("开始识别");
         initFingPrintManager(); //得到FingerprintManager实例
         if (mFM == null){
             showToast("此设备不支持指纹识别");

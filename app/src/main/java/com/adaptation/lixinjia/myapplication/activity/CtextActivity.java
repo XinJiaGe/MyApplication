@@ -22,6 +22,11 @@ public class CtextActivity extends BaseActivity{
     }
 
     @Override
+    public void doView() {
+        mTitle.setCenterText("C/C++");
+    }
+
+    @Override
     public void addListener() {
 
     }

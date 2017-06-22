@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
@@ -244,13 +243,6 @@ public abstract class BaseActivity extends AutoLayoutActivity implements View.On
         mHandler.postDelayed(mShowToastRunnable, 0);
     }
 
-    /**
-     * 打印LOG D
-     * @param msg
-     */
-    protected void LogD(String msg){
-        Log.d(TAG,msg);
-    }
     /**
      * 是否设置沉浸状态栏
      *

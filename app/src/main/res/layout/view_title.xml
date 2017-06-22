@@ -17,7 +17,7 @@
             <ImageView
                 android:layout_width="26px"
                 android:layout_height="50px"
-                android:background="@drawable/back_left"/>
+                android:background="@drawable/icon_back"/>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/view_title_center"

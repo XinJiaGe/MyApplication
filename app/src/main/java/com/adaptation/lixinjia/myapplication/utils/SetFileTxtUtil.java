@@ -13,7 +13,7 @@ import java.util.Date;
  * 说明：记录Log
  */
 
-public class SetFileTxt {
+public class SetFileTxtUtil {
     /**
      * 记录数据
      * @param name  文件名

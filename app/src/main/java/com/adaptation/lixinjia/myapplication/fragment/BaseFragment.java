@@ -103,14 +103,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     }
 
     /**
-     * 打印LOG D
-     * @param msg
-     */
-    protected void LogD(String msg){
-        Log.d(TAG,msg);
-    }
-
-    /**
      * 简化Toast
      */
     protected void showToast(String messageId){

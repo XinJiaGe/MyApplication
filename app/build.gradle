@@ -53,6 +53,7 @@ dependencies {
     compile files('libs/eventbus-1.5-src-modify.jar')
     compile project(':library_stepdetector')
     compile project(':library_utilcode')
+    compile project(':library_drawable')
 }
 repositories {
     mavenCentral()
