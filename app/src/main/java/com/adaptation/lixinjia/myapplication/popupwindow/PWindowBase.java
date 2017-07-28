@@ -3,16 +3,12 @@ package com.adaptation.lixinjia.myapplication.popupwindow;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-
-import com.adaptation.lixinjia.myapplication.app.App;
-import com.adaptation.lixinjia.myapplication.utils.ViewUtil;
 
 /**
  * 作者：李忻佳
@@ -48,7 +44,7 @@ public class PWindowBase extends PopupWindow implements View.OnClickListener
 
 	public PWindowBase(boolean isNeedBlur)
 	{
-		super(App.getApplication());
+		super();
 		setmIsNeedBlur(isNeedBlur);
 		baseInit();
 	}

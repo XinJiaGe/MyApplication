@@ -1,1 +1,1 @@
-include ':app', ':library_stepdetector', ':library_utilcode', ':library_drawable'
+include ':app', ':library_stepdetector', ':library_utilcode', ':library_drawable', ':library_calendar'

@@ -5,6 +5,7 @@
     <uses-permission android:name="com.fingerprints.service.ACCESS_FINGERPRINT_MANAGER" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature
         android:name="android.hardware.sensor.stepcounter"
@@ -50,7 +51,10 @@
         <activity android:name=".activity.KotlinDSLActivity" />
         <activity android:name=".activity.StepActivity" />
         <activity android:name=".activity.CtextActivity" />
-        <activity android:name=".activity.ExpressionActivity"></activity>
+        <activity android:name=".activity.ExpressionActivity" />
+        <activity android:name=".activity.OkHttpActivity" />
+        <activity android:name=".activity.SensorRecordActivity" />
+        <activity android:name=".activity.CalendarActivity"></activity>
     </application>
 
 </manifest>

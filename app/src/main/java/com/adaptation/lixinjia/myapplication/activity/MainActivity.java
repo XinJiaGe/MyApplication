@@ -74,6 +74,12 @@ public class MainActivity extends BaseActivity {
                     case 9:
                         startActivity(ExpressionActivity.class);
                         break;
+                    case 10:
+                        startActivity(OkHttpActivity.class);
+                        break;
+                    case 11:
+                        startActivity(CalendarActivity.class);
+                        break;
                 }
             }
         });
@@ -92,6 +98,8 @@ public class MainActivity extends BaseActivity {
         list.add("计步");
         list.add("C/C++");
         list.add("表情");
+        list.add("OkHttp");
+        list.add("日历");
         MainAdapter adapter = new MainAdapter(list,mActivity);
         horizontal.setALine(false);
         horizontal.setAdapter(adapter);

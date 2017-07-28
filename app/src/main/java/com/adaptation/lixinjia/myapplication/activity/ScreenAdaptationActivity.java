@@ -1,13 +1,12 @@
 package com.adaptation.lixinjia.myapplication.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.adaptation.lixinjia.myapplication.adapter.ScreenAdaptationAdapter;
 import com.adaptation.lixinjia.myapplication.R;
+import com.adaptation.lixinjia.myapplication.adapter.ScreenAdaptationAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

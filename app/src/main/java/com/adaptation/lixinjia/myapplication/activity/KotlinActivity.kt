@@ -22,6 +22,13 @@ class KotlinActivity : BaseKotlinActivity()  {
     }
     override fun doView() {
         mTitle?.setCenterText("Kotlin")
+//        var more = MoreView(this);
+//        more.setShowAsDropView(mTitle)
+//        more.setItemList(arrayListOf("查看源代码"))
+//        more.setmItemClickListener { view, position, id ->
+//
+//        }
+//        mTitle?.setRightView(more)
         image.setBackgroundResource(R.mipmap.ic_launcher)
     }
 

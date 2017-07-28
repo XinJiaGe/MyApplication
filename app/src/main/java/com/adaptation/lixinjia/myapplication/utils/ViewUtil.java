@@ -1,6 +1,6 @@
 package com.adaptation.lixinjia.myapplication.utils;
 
-import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -11,8 +11,8 @@ import android.view.View;
  */
 
 public class ViewUtil {
-    public static View getResId(Activity activity,int resId){
-        View contentView = LayoutInflater.from(activity).inflate(resId, null);
+    public static View getResId(Context mContext, int resId){
+        View contentView = LayoutInflater.from(mContext).inflate(resId, null);
         return contentView;
     }
 }

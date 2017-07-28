@@ -2,7 +2,6 @@ package com.adaptation.lixinjia.myapplication.view;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,10 +58,17 @@ public class TitleView extends AutoLinearLayout{
     }
 
     /**
+     * 在右边放一个view
+     * @param view
+     */
+    public void setRightView(View view){
+        right.addView(view);
+    }
+    /**
      * 设置title 中间的Veiw
      * @param view
      */
-    private void setCenterView(View view){
+    public void setCenterView(View view){
         center.removeAllViews();
         center.addView(view);
     }

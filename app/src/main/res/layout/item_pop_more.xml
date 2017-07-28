@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:padding="20px"
+        android:id="@+id/item_pop_more_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="我即使我"
+        android:textColor="@android:color/black"
+        android:textSize="34px"/>
+</LinearLayout>

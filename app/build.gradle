@@ -36,24 +36,26 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    //屏幕适配
-    compile files('libs/fingerprint.jar')
-    //魅族指纹识别sdk
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    // sdk19, sdk21, sdk23 are also available
-    // In case you need support-v4 bindings
-    // For appcompat-v7 bindings
     compile 'com.android.support:appcompat-v7:25.3.1'
+    //屏幕适配
     compile 'com.zhy:autolayout:1.4.5'
+    //魅族指纹识别
+    compile files('libs/fingerprint.jar')
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    //kotlin
     compile 'org.jetbrains.anko:anko-sdk15:0.9'
     compile 'org.jetbrains.anko:anko-support-v4:0.9'
     compile 'org.jetbrains.anko:anko-appcompat-v7:0.9'
     compile 'com.android.support:design:25.3.1'
     testCompile 'junit:junit:4.12'
+    //EventBus
     compile files('libs/eventbus-1.5-src-modify.jar')
+    //OkHttp
+    compile 'com.squareup.okhttp3:okhttp:3.8.1'
     compile project(':library_stepdetector')
     compile project(':library_utilcode')
     compile project(':library_drawable')
+    compile project(':library_calendar')
 }
 repositories {
     mavenCentral()
