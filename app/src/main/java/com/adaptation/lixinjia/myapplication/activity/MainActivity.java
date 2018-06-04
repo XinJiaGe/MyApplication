@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity {
     public void widgetClick(View v) {
 
     }
+
     @Override
     public void addListener() {
         horizontal.setOnMyClickListener(new AdaptiveHorizontalLayoutView.onMyClickListener() {
@@ -80,6 +81,36 @@ public class MainActivity extends BaseActivity {
                     case 11:
                         startActivity(CalendarActivity.class);
                         break;
+                    case 12:
+                        startActivity(BankCardScanningActivity.class);
+                        break;
+                    case 13:
+                        startActivity(MessageRedPointActivity.class);
+                        break;
+                    case 14:
+                        startActivity(XunFeiActivity.class);
+                        break;
+                    case 15:
+                        startActivity(PhotoAlbumPhotoActivity.class);
+                        break;
+                    case 16:
+                        startActivity(AidiActivity.class);
+                        break;
+                    case 17:
+                        startActivity(MessengerActivity.class);
+                        break;
+                    case 18:
+                        startActivity(BannerActivity.class);
+                        break;
+                    case 19:
+                        startActivity(MainSelectActivity.class);
+                        break;
+                    case 20:
+                        startActivity(BluetoothControlActivity.class);
+                        break;
+                    case 21:
+                        startActivity(RichTextActivity.class);
+                        break;
                 }
             }
         });
@@ -100,7 +131,17 @@ public class MainActivity extends BaseActivity {
         list.add("表情");
         list.add("OkHttp");
         list.add("日历");
-        MainAdapter adapter = new MainAdapter(list,mActivity);
+        list.add("银行卡扫描");
+        list.add("消息红点");
+        list.add("讯飞服务");
+        list.add("相册拍照图片");
+        list.add("aidi");
+        list.add("Messenger");
+        list.add("轮播");
+        list.add("主页选择");
+        list.add("蓝牙控制");
+        list.add("富文本编辑器");
+        MainAdapter adapter = new MainAdapter(list, mActivity);
         horizontal.setALine(false);
         horizontal.setAdapter(adapter);
         horizontal.startCanvase();

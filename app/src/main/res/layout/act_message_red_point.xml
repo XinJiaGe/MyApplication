@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:padding="40px"
+    android:orientation="vertical">
+    <cn.bingoogolapple.badgeview.BGABadgeTextView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/act_message_red_point1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20px"
+        android:layout_centerInParent="true"
+        android:background="@android:color/holo_blue_light"
+        android:text="看，有新消息"
+        android:textColor="@android:color/white"
+        app:badge_gravity="rightTop"
+        app:badge_padding="20px" />
+
+    <Button
+        android:id="@+id/act_message_red_point_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40px"
+        android:text="显示/不显示"
+        android:textSize="34px"/>
+</LinearLayout>

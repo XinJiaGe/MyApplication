@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <EditText
+        android:id="@+id/xunfei_synthesis_edtext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="恭喜收款215.15元"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+        <RadioGroup
+            android:id="@+id/tts_btn_person_rediogroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <RadioButton
+                android:id="@+id/tts_btn_person_onLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="在线合成" />
+            <RadioButton
+                android:id="@+id/tts_btn_person_offLine"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="本地合成" />
+        </RadioGroup>
+        <Button
+            android:layout_marginLeft="30px"
+            android:id="@+id/tts_btn_person_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择合成人"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/xunfei_synthesis_start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开始合成"/>
+    <Button
+        android:id="@+id/xunfei_synthesis_end"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="取消合成"/>
+    <Button
+        android:id="@+id/xunfei_synthesis_suspend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="暂停播放"/>
+    <Button
+        android:id="@+id/xunfei_synthesis_continue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="继续播放"/>
+</LinearLayout>

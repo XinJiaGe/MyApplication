@@ -6,4 +6,5 @@
 
     <!-- 分割线颜色 -->
     <color name="stroke">#e5e5e5</color>
+    <color name="black">#000000</color>
 </resources>

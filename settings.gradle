@@ -1,1 +1,1 @@
-include ':app', ':library_stepdetector', ':library_utilcode', ':library_drawable', ':library_calendar'
+include ':app', ':library_stepdetector', ':library_utilcode', ':library_drawable', ':library_calendar', ':library_BGABadgeView', ':library_xunfei', ':library_jia', ':library_banner1.4.10', ':library_xutils3.3.40'

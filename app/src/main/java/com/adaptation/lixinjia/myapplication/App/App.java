@@ -1,9 +1,12 @@
 package com.adaptation.lixinjia.myapplication.app;
 
 import android.app.Application;
+import android.os.Build;
+import android.os.StrictMode;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.Utils;
+import com.iflytek.cloud.SpeechUtility;
 import com.sunday.eventbus.SDEventManager;
 import com.xinjiage.stepdetector.StepDetector;
 
@@ -39,13 +42,24 @@ public class App extends Application{
     }
 
     private void init() {
+        // android 7.0系统解决拍照的问题
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.setVmPolicy(builder.build());
+            builder.detectFileUriExposure();
+        }
         isDebug = true;
         /* 初始化计步模块 */
         StepDetector.getInstance().init(this).startStepService();
         /* 初始化LogUtil工具类 */
         initLogUtile();
+        /*讯飞初始化*/
+        xunfei();
     }
 
+    /**
+     * 初始化LogUtil工具类
+     */
     private void initLogUtile(){
         Utils.init(this);
         LogUtils.Builder lBuilder = new LogUtils.Builder();
@@ -62,5 +76,23 @@ public class App extends Application{
     public void onTerminate() {
         SDEventManager.unregister(this);
         super.onTerminate();
+    }
+
+    /**
+     * 讯飞初始化
+     */
+    private void xunfei(){
+        // 应用程序入口处调用，避免手机内存过小，杀死后台进程后通过历史intent进入Activity造成SpeechUtility对象为null
+        // 如在Application中调用初始化，需要在Mainifest中注册该Applicaiton
+        // 注意：此接口在非主进程调用会返回null对象，如需在非主进程使用语音功能，请增加参数：SpeechConstant.FORCE_LOGIN+"=true"
+        // 参数间使用半角“,”分隔。
+        // 设置你申请的应用appid,请勿在'='与appid之间添加空格及空转义符
+
+        // 注意： appid 必须和下载的SDK保持一致，否则会出现10407错误
+
+        SpeechUtility.createUtility(this, "appid=5a37988a");
+
+        // 以下语句用于设置日志开关（默认开启），设置成false时关闭语音云SDK日志打印
+        // Setting.setShowLog(false);
     }
 }

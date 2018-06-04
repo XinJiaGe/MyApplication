@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center">
+    <ImageView
+        android:id="@+id/view_main_select_image"
+        android:layout_width="50px"
+        android:layout_height="50px"
+        android:background="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/view_main_select_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="钱包"
+        android:textSize="28px" />
+</LinearLayout>
