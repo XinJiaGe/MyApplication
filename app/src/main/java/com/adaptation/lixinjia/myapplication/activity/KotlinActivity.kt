@@ -152,13 +152,13 @@ class KotlinActivity : BaseKotlinActivity()  {
         }
 
         stringBuilder?.append("\n");
-        stringBuilder?.append("在范围内迭代：：\n");
+        stringBuilder?.append("在范围内迭代：：\n")
         for (x in 1..5) {
             stringBuilder?.append(x)
         }
 
         stringBuilder?.append("\n");
-        stringBuilder?.append("\n或者使用步进：\n");
+        stringBuilder?.append("\n或者使用步进：\n")
         for (x in 1..10 step 2) {
             stringBuilder?.append(x)
         }
@@ -168,7 +168,7 @@ class KotlinActivity : BaseKotlinActivity()  {
         }
 
         stringBuilder?.append("\n");
-        stringBuilder?.append("\n对一个集合进行迭代：\n");
+        stringBuilder?.append("\n对一个集合进行迭代：\n")
         for (item in items) {
             stringBuilder?.append(item+"")
         }

@@ -16,7 +16,7 @@ import com.adaptation.lixinjia.myapplication.utils.ExpressionUtil
  */
 class ExpressionAdapter(mListModel: List<String>, mActivity: Activity?) : BaseKotlinAdapter<String>(mListModel, mActivity) {
     override fun bindData(position: Int, convertView: View, parent: ViewGroup, model: String) {
-        val text = convertView.findViewById(R.id.ItemExpressionTv) as TextView
+        val text = convertView.findViewById<TextView>(R.id.ItemExpressionTv)
         val zhengze = "f0[0-9]{2}|f10[0-7]"
         val spannableString = ExpressionUtil.getExpressionString(mActivity, model, zhengze)
         text.text = spannableString

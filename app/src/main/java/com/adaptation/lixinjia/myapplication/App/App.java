@@ -10,6 +10,8 @@ import com.iflytek.cloud.SpeechUtility;
 import com.sunday.eventbus.SDEventManager;
 import com.xinjiage.stepdetector.StepDetector;
 
+import org.xutils.x;
+
 /**
  * 作者：李忻佳
  * 时间：2017/5/4
@@ -55,6 +57,9 @@ public class App extends Application{
         initLogUtile();
         /*讯飞初始化*/
         xunfei();
+        //xUtils3
+        x.Ext.init(this);
+        x.Ext.setDebug(isDebug); //输出debug日志，开启会影响性能
     }
 
     /**

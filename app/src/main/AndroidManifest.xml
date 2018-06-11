@@ -90,6 +90,7 @@
         <activity android:name=".activity.MainSelectActivity"/>
         <activity android:name=".activity.BluetoothControlActivity"/>
         <activity android:name=".activity.RichTextActivity"/>
+        <activity android:name=".activity.XmlExtractActivity"/>
     </application>
 
 </manifest>

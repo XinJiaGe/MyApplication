@@ -111,6 +111,9 @@ public class MainActivity extends BaseActivity {
                     case 21:
                         startActivity(RichTextActivity.class);
                         break;
+                    case 22:
+                        startActivity(XmlExtractActivity.class);
+                        break;
                 }
             }
         });
@@ -141,6 +144,7 @@ public class MainActivity extends BaseActivity {
         list.add("主页选择");
         list.add("蓝牙控制");
         list.add("富文本编辑器");
+        list.add("xml提取");
         MainAdapter adapter = new MainAdapter(list, mActivity);
         horizontal.setALine(false);
         horizontal.setAdapter(adapter);

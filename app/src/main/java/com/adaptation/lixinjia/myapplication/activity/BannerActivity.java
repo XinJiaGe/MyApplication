@@ -57,6 +57,7 @@ public class BannerActivity extends BaseActivity {
 
     @Override
     public void initView(View view) {
+        mTitle.setCenterText("轮播");
         banner = $(R.id.banner);
         tv_notice = $(R.id.act_banner_text);
         marqueeView = $(R.id.marqueeView);

@@ -1,11 +1,15 @@
 package com.adaptation.lixinjia.myapplication.adapter;
 
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.zhy.autolayout.utils.AutoUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,52 +18,21 @@ import java.util.List;
  * 说明：BaseAdapter<T>
  */
 
-public abstract class BaseAdapter<T> extends android.widget.BaseAdapter {
-    protected Activity mActivity;
-    private List<T> mListModel;
-
-    public BaseAdapter(List<T> listModel, Activity activity){
-        this.mListModel = listModel;
-        this.mActivity = activity;
+public abstract class BaseAdapter<T> extends SDAdapter<T>{
+    public BaseAdapter(List<T> listModel, Activity activity) {
+        super(listModel, activity);
     }
 
     @Override
-    public int getCount() {
-        return mListModel.size();
-    }
-
-    @Override
-    public T getItem(int position) {
-        if (isPositionLegal(position)) {
-            return mListModel.get(position);
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    protected View onGetView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             int layoutId = getLayoutId(position, convertView, parent);
-            convertView = mActivity.getLayoutInflater().inflate(layoutId, null);
+            convertView = mInflater.inflate(layoutId, parent, false);
             //对于listview，注意添加这一行，即可在item上使用高度
             AutoUtils.autoSize(convertView);
         }
         bindData(position, convertView, parent, getItem(position));
         return convertView;
-    }
-
-    public boolean isPositionLegal(int position) {
-        if (mListModel != null && !mListModel.isEmpty() && position >= 0 && position < mListModel.size()) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public abstract int getLayoutId(int position, View convertView, ViewGroup parent);
