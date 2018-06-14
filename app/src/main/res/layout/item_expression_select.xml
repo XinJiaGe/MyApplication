@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center">
-    <com.adaptation.lixinjia.myapplication.view.HeightEqualWidthView
+    <com.lixinjia.myapplication.view.HeightEqualWidthView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
@@ -12,5 +12,5 @@
             android:id="@+id/item_expression_select_imag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-    </com.adaptation.lixinjia.myapplication.view.HeightEqualWidthView>
+    </com.lixinjia.myapplication.view.HeightEqualWidthView>
 </LinearLayout>

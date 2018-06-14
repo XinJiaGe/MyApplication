@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
-    <com.adaptation.lixinjia.myapplication.view.AdaptiveHorizontalLayoutView
+    <com.lixinjia.myapplication.view.AdaptiveHorizontalLayoutView
         android:id="@+id/act_main_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.adaptation.lixinjia.myapplication.view.AdaptiveHorizontalLayoutView>
+        android:layout_height="match_parent"></com.lixinjia.myapplication.view.AdaptiveHorizontalLayoutView>
 </LinearLayout>

@@ -4,7 +4,7 @@
     android:id="@+id/activity_expression"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.adaptation.lixinjia.myapplication.activity.ExpressionActivity">
+    tools:context="com.lixinjia.myapplication.activity.ExpressionActivity">
 
     <LinearLayout
         android:id="@+id/act_expression_ll"
@@ -47,10 +47,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/stroke"></View>
-            <com.adaptation.lixinjia.myapplication.view.WrapContentHeightViewPager
+            <com.lixinjia.myapplication.view.WrapContentHeightViewPager
                 android:id="@+id/ActExpressionVp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.adaptation.lixinjia.myapplication.view.WrapContentHeightViewPager>
+                android:layout_height="wrap_content"></com.lixinjia.myapplication.view.WrapContentHeightViewPager>
         </LinearLayout>
     </LinearLayout>
     <ListView

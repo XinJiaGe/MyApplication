@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.adaptation.lixinjia.myapplication.surface.GameSurfaceView
+    <com.lixinjia.myapplication.surface.GameSurfaceView
         android:id="@+id/act_game_surface"
         android:layout_height="match_parent"
-        android:layout_width="match_parent"></com.adaptation.lixinjia.myapplication.surface.GameSurfaceView>
+        android:layout_width="match_parent"></com.lixinjia.myapplication.surface.GameSurfaceView>
 </RelativeLayout>

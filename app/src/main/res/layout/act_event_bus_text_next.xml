@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.adaptation.lixinjia.myapplication.activity.EventBusTextNextActivity">
+    tools:context="com.lixinjia.myapplication.activity.EventBusTextNextActivity">
     <Button
         android:id="@+id/ActEventBusTextNextBut"
         android:layout_width="match_parent"

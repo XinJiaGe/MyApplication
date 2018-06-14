@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.adaptation.lixinjia.library_calendar.R;
+import com.lixinjia.library_calendar.R;
 import com.adaptation.lixinjia.util.Util;
 
 import java.util.Calendar;

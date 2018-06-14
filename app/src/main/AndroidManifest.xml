@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.adaptation.lixinjia.myapplication">
+    package="com.lixinjia.myapplication">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -23,7 +23,7 @@
         android:name="android.hardware.sensor.stepdetector"
         android:required="true" />
 
-    <uses-permission android:name="com.adaptation.lixinjia.myapplication.permission"/>
+    <uses-permission android:name="com.lixinjia.myapplication.permission"/>
 
     <application
         android:name=".app.App"
