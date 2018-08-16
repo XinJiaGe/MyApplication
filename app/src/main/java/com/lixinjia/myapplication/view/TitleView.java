@@ -23,6 +23,7 @@ public class TitleView extends AutoLinearLayout{
     private LinearLayout right;
     private Context mContext;
     private int centerTextSize = 17;
+    private int rightTextSize = 15;
     private int centerTextColor = Color.BLACK;
     private OnBackClickListener mOnBackClickListener;
 
@@ -56,7 +57,18 @@ public class TitleView extends AutoLinearLayout{
         titleView.setTextSize(TypedValue.COMPLEX_UNIT_SP,centerTextSize);
         center.addView(titleView);
     }
-
+    /**
+     * 设置title 中间的标题 text
+     * @param text
+     */
+    public void setRightText(String text){
+        right.removeAllViews();
+        TextView titleView = new TextView(mContext);
+        titleView.setText(text);
+        titleView.setTextColor(centerTextColor);
+        titleView.setTextSize(TypedValue.COMPLEX_UNIT_SP,rightTextSize);
+        setRightView(titleView);
+    }
     /**
      * 在右边放一个view
      * @param view

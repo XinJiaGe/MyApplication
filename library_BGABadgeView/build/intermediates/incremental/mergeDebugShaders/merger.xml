@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="F:\BaiduNetdiskDownload\myApp\GitHome\MyApplication\library_BGABadgeView\src\main\shaders"/></dataSet><dataSet config="debug"><source path="F:\BaiduNetdiskDownload\myApp\GitHome\MyApplication\library_BGABadgeView\src\debug\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="F:\SVN\MyApplication\library_BGABadgeView\src\main\shaders"/></dataSet><dataSet config="debug"><source path="F:\SVN\MyApplication\library_BGABadgeView\src\debug\shaders"/></dataSet></merger>

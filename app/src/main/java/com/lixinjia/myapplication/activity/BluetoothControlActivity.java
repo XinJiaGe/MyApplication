@@ -40,6 +40,7 @@ public class BluetoothControlActivity extends BaseActivity {
 
     @Override
     public void initView(View view) {
+        mTitle.setCenterText("蓝牙控制");
         bt1 = $(R.id.act_bluetooth_bt1);
         bt2 = $(R.id.act_bluetooth_bt2);
         bt3 = $(R.id.act_bluetooth_bt3);

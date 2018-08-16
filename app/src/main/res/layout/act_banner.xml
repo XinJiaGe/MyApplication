@@ -9,24 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="400px" />
 
-    <LinearLayout
-        android:padding="20px"
-        android:layout_marginTop="30px"
-        android:layout_width="match_parent"
+    <TextSwitcher
+        android:id="@+id/act_banner_text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-        <ImageView
-            android:layout_width="50px"
-            android:layout_height="50px"
-            android:background="@mipmap/ic_launcher"/>
-        <TextSwitcher
-            android:id="@+id/act_banner_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="60px"
-            android:textSize="34px"  />
-    </LinearLayout>
+        android:layout_marginLeft="60px"
+        android:textSize="34px"  />
 
     <com.sunfusheng.marqueeview.MarqueeView
         android:id="@+id/marqueeView"

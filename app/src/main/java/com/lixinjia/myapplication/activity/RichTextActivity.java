@@ -50,6 +50,7 @@ public class RichTextActivity extends BaseActivity {
 
     @Override
     public void initView(View view) {
+        mTitle.setCenterText("富文本编辑器");
         text = $(R.id.act_richtext_text);
         italic = $(R.id.act_richtext_italic);
         title = $(R.id.act_richtext_title);

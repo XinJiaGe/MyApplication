@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/MyApplication.iml" filepath="$PROJECT_DIR$/MyApplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_BGABadgeView/library_BGABadgeView.iml" filepath="$PROJECT_DIR$/library_BGABadgeView/library_BGABadgeView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library_LRecyclerview/library_LRecyclerview.iml" filepath="$PROJECT_DIR$/library_LRecyclerview/library_LRecyclerview.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_banner1.4.10/library_banner1.4.10.iml" filepath="$PROJECT_DIR$/library_banner1.4.10/library_banner1.4.10.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_calendar/library_calendar.iml" filepath="$PROJECT_DIR$/library_calendar/library_calendar.iml" />
       <module fileurl="file://$PROJECT_DIR$/library_drawable/library_drawable.iml" filepath="$PROJECT_DIR$/library_drawable/library_drawable.iml" />

@@ -62,6 +62,9 @@
                 android:resource="@xml/file_path" />
         </provider>
 
+        <activity android:name=".activity.lrecyclerview.TextLRecyclerviewActivity" />
+        <activity android:name=".activity.lrecyclerview.LRecyclerviewActivity" />
+        <activity android:name=".activity.lrecyclerview.MyLRecyclerviewActivity" />
         <activity android:name=".activity.MessengerActivity" />
         <activity android:name=".activity.AidiActivity" />
         <activity android:name=".activity.PhotoAlbumPhotoActivity" />

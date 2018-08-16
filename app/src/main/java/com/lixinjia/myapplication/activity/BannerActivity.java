@@ -1,5 +1,6 @@
 package com.lixinjia.myapplication.activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
@@ -85,7 +86,6 @@ public class BannerActivity extends BaseActivity {
      */
     private void rollUpDown2() {
         final List<String> info = new ArrayList<>();
-        info.add("1. 大家好，我是孙福生。");
         info.add("2. 欢迎大家关注我哦！");
         info.add("3. GitHub帐号：sfsheng0322");
         info.add("4. 新浪微博：孙福生微博");
@@ -112,6 +112,7 @@ public class BannerActivity extends BaseActivity {
                 TextView tv = new TextView(getApplicationContext());
                 // 设置文字的显示单位以及文字的大小
                 tv.setTextSize(TypedValue.COMPLEX_UNIT_PX, 34);
+                tv.setCompoundDrawables(loadDrawable(R.mipmap.ic_launcher),null,null,null);
                 return tv;
             }
         });
@@ -177,7 +178,16 @@ public class BannerActivity extends BaseActivity {
         //banner设置方法全部调用完毕时最后调用
         banner.start();
     }
-
+    /**
+     *  将资源图片转换为Drawable对象
+     * @param ResId
+     * @return
+     */
+    private Drawable loadDrawable(int ResId) {
+        Drawable drawable = getResources().getDrawable(ResId);
+        drawable.setBounds(0, 0, 50, 50);
+        return drawable;
+    }
     //如果你需要考虑更好的体验，可以这么操作
     @Override
     protected void onStart() {

@@ -3,6 +3,7 @@ package com.lixinjia.myapplication.activity;
 import android.view.View;
 
 import com.lixinjia.myapplication.R;
+import com.lixinjia.myapplication.activity.lrecyclerview.MyLRecyclerviewActivity;
 import com.lixinjia.myapplication.adapter.MainAdapter;
 import com.lixinjia.myapplication.view.AdaptiveHorizontalLayoutView;
 
@@ -103,16 +104,16 @@ public class MainActivity extends BaseActivity {
                         startActivity(BannerActivity.class);
                         break;
                     case 19:
-                        startActivity(MainSelectActivity.class);
-                        break;
-                    case 20:
                         startActivity(BluetoothControlActivity.class);
                         break;
-                    case 21:
+                    case 20:
                         startActivity(RichTextActivity.class);
                         break;
-                    case 22:
+                    case 21:
                         startActivity(XmlExtractActivity.class);
+                        break;
+                    case 22:
+                        startActivity(MyLRecyclerviewActivity.class);
                         break;
                 }
             }
@@ -141,10 +142,10 @@ public class MainActivity extends BaseActivity {
         list.add("aidi");
         list.add("Messenger");
         list.add("轮播");
-        list.add("主页选择");
         list.add("蓝牙控制");
         list.add("富文本编辑器");
         list.add("xml提取");
+        list.add("LRecyclerView");
         MainAdapter adapter = new MainAdapter(list, mActivity);
         horizontal.setALine(false);
         horizontal.setAdapter(adapter);
