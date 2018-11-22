@@ -81,6 +81,8 @@ dependencies {
     implementation 'com.github.chenupt.android:springindicator:1.0.2@aar'
     //炫酷计时器
     implementation(group: 'com.jiahuan.timelyanimation', name: 'timelyanimation', version: '0.5.0', ext: 'aar')
+    //CheckBox切换 SwitchButton
+    implementation 'com.github.zcweng:switch-button:0.0.3@aar'
 
 
     implementation project(':library_jia')

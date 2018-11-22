@@ -63,6 +63,7 @@ public class MainActivity extends BaseActivity {
         list.add(new MainEntity().setName("锁柜(广播)").setClz(LockCabinetBroadcastActivity.class));
         list.add(new MainEntity().setName("BaseSurfaceView").setClz(GameSurfaceActivity.class));
         list.add(new MainEntity().setName("切换动画").setClz(SwitchAnimationActivity.class));
+        list.add(new MainEntity().setName("计时器动画").setClz(TimerActivity.class));
         MainAdapter adapter = new MainAdapter(list, mActivity);
         horizontal.setALine(false);
         horizontal.setAdapter(adapter);

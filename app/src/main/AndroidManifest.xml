@@ -33,6 +33,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
+        <activity android:name=".activity.CheckBoxSwitchActivity" />
+        <activity android:name=".activity.TimerActivity" />
         <activity android:name=".activity.SpringIndicatorActivity" />
         <activity android:name=".activity.SwitchAnimationActivity" />
         <activity android:name=".activity.LockCabinetBroadcastActivity" />

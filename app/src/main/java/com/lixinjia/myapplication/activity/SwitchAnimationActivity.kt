@@ -16,13 +16,16 @@ class SwitchAnimationActivity : BaseKotlinActivity() {
     }
 
     override fun addListener(): List<View> {
-        return listOf(switchanimationSpringIndicator)
+        return listOf(switchanimationSpringIndicator,checkBoxSwitch)
     }
 
     override fun widgetClick(view: View?) {
         when (view) {
             switchanimationSpringIndicator -> {
                 startActivity(SpringIndicatorActivity::class.java)
+            }
+            checkBoxSwitch -> {
+                startActivity(CheckBoxSwitchActivity::class.java)
             }
         }
     }
