@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <github.chenupt.springindicator.SpringIndicator
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:siIndicatorColors="@array/indicator_colors"
+        app:siTextColor="@color/colorPrimaryDark"
+        app:siSelectedTextColor="@android:color/white"
+        app:siIndicatorColor="@color/colorPrimary"
+        app:siRadiusMax="5dp"
+        app:siRadiusMin="2dp"
+        android:id="@+id/springindicatorSI"
+        android:layout_width="200px"
+        android:layout_height="50px"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/springindicatorVP"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+</LinearLayout>

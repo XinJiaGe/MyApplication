@@ -5,6 +5,7 @@ import android.view.View;
 import com.lixinjia.myapplication.R;
 import com.lixinjia.myapplication.activity.lrecyclerview.MyLRecyclerviewActivity;
 import com.lixinjia.myapplication.adapter.MainAdapter;
+import com.lixinjia.myapplication.model.MainEntity;
 import com.lixinjia.myapplication.view.AdaptiveHorizontalLayoutView;
 
 import java.util.ArrayList;
@@ -27,125 +28,41 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView(View view) {
+        mTitle.setCenterText("我的");
         horizontal = $(R.id.act_main_horizontal);
     }
 
     @Override
-    public void doView() {
-        mTitle.setCenterText("我的");
-    }
-
-    @Override
-    public void widgetClick(View v) {
-
-    }
-
-    @Override
-    public void addListener() {
-        horizontal.setOnMyClickListener(new AdaptiveHorizontalLayoutView.onMyClickListener() {
-            @Override
-            public void onClick(int index, View view) {
-                switch (index) {
-                    case 0:
-                        startActivity(ScreenAdaptationActivity.class);
-                        break;
-                    case 1:
-                        startActivity(MeiZuFingerprintIdentificationActivity.class);
-                        break;
-                    case 2:
-                        startActivity(NativeFingerprintIdentificationActivity.class);
-                        break;
-                    case 3:
-                        startActivity(GameSurfaceActivity.class);
-                        break;
-                    case 4:
-                        startActivity(KotlinActivity.class);
-                        break;
-                    case 5:
-                        startActivity(KotlinDSLActivity.class);
-                        break;
-                    case 6:
-                        startActivity(EventBusTextActivity.class);
-                        break;
-                    case 7:
-                        startActivity(StepActivity.class);
-                        break;
-                    case 8:
-                        startActivity(CtextActivity.class);
-                        break;
-                    case 9:
-                        startActivity(ExpressionActivity.class);
-                        break;
-                    case 10:
-                        startActivity(OkHttpActivity.class);
-                        break;
-                    case 11:
-                        startActivity(CalendarActivity.class);
-                        break;
-                    case 12:
-                        startActivity(BankCardScanningActivity.class);
-                        break;
-                    case 13:
-                        startActivity(MessageRedPointActivity.class);
-                        break;
-                    case 14:
-                        startActivity(XunFeiActivity.class);
-                        break;
-                    case 15:
-                        startActivity(PhotoAlbumPhotoActivity.class);
-                        break;
-                    case 16:
-                        startActivity(AidiActivity.class);
-                        break;
-                    case 17:
-                        startActivity(MessengerActivity.class);
-                        break;
-                    case 18:
-                        startActivity(BannerActivity.class);
-                        break;
-                    case 19:
-                        startActivity(BluetoothControlActivity.class);
-                        break;
-                    case 20:
-                        startActivity(RichTextActivity.class);
-                        break;
-                    case 21:
-                        startActivity(XmlExtractActivity.class);
-                        break;
-                    case 22:
-                        startActivity(MyLRecyclerviewActivity.class);
-                        break;
-                }
-            }
-        });
-    }
-
-    @Override
     public void doBusiness() {
-        List<String> list = new ArrayList<>();
-        list.add("适配屏幕");
-        list.add("魅族指纹识别");
-        list.add("原生指纹识别");
-        list.add("BaseSurfaceView");
-        list.add("Kotlin插件");
-        list.add("Kotlin DSL布局");
-        list.add("EventBus");
-        list.add("计步");
-        list.add("C/C++");
-        list.add("表情");
-        list.add("OkHttp");
-        list.add("日历");
-        list.add("银行卡扫描");
-        list.add("消息红点");
-        list.add("讯飞服务");
-        list.add("相册拍照图片");
-        list.add("aidi");
-        list.add("Messenger");
-        list.add("轮播");
-        list.add("蓝牙控制");
-        list.add("富文本编辑器");
-        list.add("xml提取");
-        list.add("LRecyclerView");
+        List<MainEntity> list = new ArrayList<>();
+        list.add(new MainEntity().setName("适配屏幕").setClz(ScreenAdaptationActivity.class));
+        list.add(new MainEntity().setName("魅族指纹识别").setClz(MeiZuFingerprintIdentificationActivity.class));
+        list.add(new MainEntity().setName("原生指纹识别").setClz(NativeFingerprintIdentificationActivity.class));
+        list.add(new MainEntity().setName("Kotlin插件").setClz(KotlinActivity.class));
+        list.add(new MainEntity().setName("KotlinDSL布局").setClz(KotlinDSLActivity.class));
+        list.add(new MainEntity().setName("EventBus").setClz(EventBusTextActivity.class));
+        list.add(new MainEntity().setName("计步").setClz(StepActivity.class));
+        list.add(new MainEntity().setName("C/C++").setClz(CtextActivity.class));
+        list.add(new MainEntity().setName("表情").setClz(ExpressionActivity.class));
+        list.add(new MainEntity().setName("OkHttp").setClz(OkHttpActivity.class));
+        list.add(new MainEntity().setName("消息红点").setClz(MessageRedPointActivity.class));
+//        list.add(new MainEntity().setName("日历").setClz(CalendarActivity.class));
+        list.add(new MainEntity().setName("银行卡扫描").setClz(BankCardScanningActivity.class));
+        list.add(new MainEntity().setName("讯飞服务").setClz(XunFeiActivity.class));
+        list.add(new MainEntity().setName("相册拍照图片").setClz(PhotoAlbumPhotoActivity.class));
+        list.add(new MainEntity().setName("aidi").setClz(AidiActivity.class));
+        list.add(new MainEntity().setName("Messenger").setClz(MessengerActivity.class));
+        list.add(new MainEntity().setName("轮播").setClz(BannerActivity.class));
+        list.add(new MainEntity().setName("蓝牙控制").setClz(BluetoothControlActivity.class));
+        list.add(new MainEntity().setName("富文本编辑器").setClz(RichTextActivity.class));
+        list.add(new MainEntity().setName("xml提取").setClz(XmlExtractActivity.class));
+        list.add(new MainEntity().setName("LRecyclerView").setClz(MyLRecyclerviewActivity.class));
+        list.add(new MainEntity().setName("环信").setClz(HuanXinActivity.class));
+        list.add(new MainEntity().setName("统计图").setClz(SummaryGraphActivity.class));
+        list.add(new MainEntity().setName("锁柜(mac)").setClz(LockCabinetActivity.class));
+        list.add(new MainEntity().setName("锁柜(广播)").setClz(LockCabinetBroadcastActivity.class));
+        list.add(new MainEntity().setName("BaseSurfaceView").setClz(GameSurfaceActivity.class));
+        list.add(new MainEntity().setName("切换动画").setClz(SwitchAnimationActivity.class));
         MainAdapter adapter = new MainAdapter(list, mActivity);
         horizontal.setALine(false);
         horizontal.setAdapter(adapter);

@@ -1,13 +1,15 @@
 package com.lixinjia.myapplication.activity;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.lixinjia.myapplication.R;
 import com.lixinjia.myapplication.utils.CUtile;
+import com.lixinjia.myapplication.utils.SDToast;
 
 public class CtextActivity extends BaseActivity{
-    private TextView ActCText2;
+    private static TextView ActCText2;
     private TextView ActCText1;
 
     @Override
@@ -38,12 +40,11 @@ public class CtextActivity extends BaseActivity{
 
     @Override
     public void doBusiness() {
-//        CUtile.getCJNI();
         ActCText1.setText(CUtile.getJavaJNI());
+//        CUtile.getCJNI();
     }
 
     public static void javaLog() {
-//        ActCText2.setText("C 已经调用 Java 方法");
-//        ActCText1.setText(CUtile.getJavaJNI());
+//        SDToast.showToast("C 调用Java 成功");
     }
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <EditText
+        android:id="@+id/act_huanxing_username"
+        android:layout_width="match_parent"
+        android:text="user20180918000005"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/act_huanxing_pwd"
+        android:layout_width="match_parent"
+        android:text="e6486fabc33231d1379fe21ecbabb770b9adc8d5"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/act_huanxing_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="登录"/>
+    <EditText
+        android:id="@+id/act_huanxing_sendEt"
+        android:layout_width="match_parent"
+        android:text="测试"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/act_huanxing_send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发送"/>
+</LinearLayout>

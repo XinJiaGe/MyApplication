@@ -81,22 +81,23 @@ public class OkHttpActivity extends BaseActivity {
             });
         }
         if(v == mBtDownload){
-            OkHttpManager.getInstance().requestInterfaceDownload("", new OkHttpCallback.ProgressCallback() {
-                @Override
-                public void onFailure(Exception e) {
-
-                }
-
-                @Override
-                public void onSuccess() {
-
-                }
-
-                @Override
-                public void onResponseProgress(long bytesRead, long contentLength, boolean done) {
-
-                }
-            });
+//            OkHttpManager.getInstance().requestInterfaceDownload("https://757100b0b3f5c21c6207c48fd535c499.dd.cdntips.com/imtt.dd.qq.com/16891/0FA332757820B0B6CCBA57FCCD15B4D6." +
+//                    "apk?mkey=5bda43ffdd0c2a87&f=0c27&fsname=com.tencent.mobileqq_7.8.8_942.apk&csr=1bbd&cip=221.12.12.114&proto=https", new OkHttpCallback.ProgressCallback() {
+//                @Override
+//                public void onFailure(Exception e) {
+//                    mTvText.setText("下载失败");
+//                }
+//
+//                @Override
+//                public void onSuccess() {
+//                    mTvText.setText("下载成功");
+//                }
+//
+//                @Override
+//                public void onResponseProgress(long bytesRead, long contentLength, boolean done) {
+//                    mTvText.setText("下载中  "+bytesRead+" - "+contentLength+" - "+done);
+//                }
+//            });
         }
         if(v == mBtUpload){
         }

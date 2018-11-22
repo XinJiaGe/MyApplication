@@ -45,4 +45,11 @@ public class GameSurfaceActivity extends BaseActivity {
     @Override
     public void doBusiness() {
     }
+
+    @Override
+    protected void onDestroy() {
+        surface.onDestroy();
+        super.onDestroy();
+
+    }
 }

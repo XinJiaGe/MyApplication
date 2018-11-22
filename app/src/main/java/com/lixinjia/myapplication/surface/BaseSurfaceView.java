@@ -220,4 +220,8 @@ public abstract class BaseSurfaceView extends SurfaceView implements Callback,Ru
     public void setSfh(SurfaceHolder sfh) {
         this.sfh = sfh;
     }
+
+    public void stop(){
+
+    }
 }

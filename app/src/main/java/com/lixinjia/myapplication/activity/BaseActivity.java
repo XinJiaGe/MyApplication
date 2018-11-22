@@ -41,6 +41,7 @@ public abstract class BaseActivity extends AutoLayoutActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initBar();
         Bundle bundle = getIntent().getExtras();
         initParms(bundle);
         View mView = bindView();
@@ -119,11 +120,16 @@ public abstract class BaseActivity extends AutoLayoutActivity implements View.On
         }
     }
     /**
+     * 初始化头
+     *
+     */
+    public void initBar(){}
+    /**
      * 初始化参数
      *
      * @param parms
      */
-    public void initParms(Bundle parms){};
+    public void initParms(Bundle parms){}
 
     /**
      * 绑定视图
@@ -162,23 +168,23 @@ public abstract class BaseActivity extends AutoLayoutActivity implements View.On
     /**
      * 设置监听
      */
-    public abstract void addListener();
+    public void addListener(){};
 
     /**
      * View点击
      * @param v
      */
-    public abstract void widgetClick(View v);
+    public void widgetClick(View v){}
     /**
      * 业务操作
      *
      */
-    public abstract void doBusiness();
+    public void doBusiness(){}
     /**
      * View操作
      *
      */
-    public void doView(){};
+    public void doView(){}
 
     @Override
     protected void onResume() {

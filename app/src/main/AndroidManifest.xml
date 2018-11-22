@@ -32,36 +32,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <meta-data
-            android:name="design_width"
-            android:value="750" />
-        <meta-data
-            android:name="design_height"
-            android:value="1334" />
-        <!-- 计步服务 -->
-        <service
-            android:name="com.xinjiage.stepdetector.service.StepCounterService"
-            android:label="StepCounterService" />
 
-        <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <!--数据共享-->
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_path" />
-        </provider>
-
+        <activity android:name=".activity.SpringIndicatorActivity" />
+        <activity android:name=".activity.SwitchAnimationActivity" />
+        <activity android:name=".activity.LockCabinetBroadcastActivity" />
+        <activity android:name=".activity.SummaryGraphActivity" />
+        <activity android:name=".activity.LockCabinetActivity" />
         <activity android:name=".activity.lrecyclerview.TextLRecyclerviewActivity" />
         <activity android:name=".activity.lrecyclerview.LRecyclerviewActivity" />
         <activity android:name=".activity.lrecyclerview.MyLRecyclerviewActivity" />
@@ -94,6 +70,58 @@
         <activity android:name=".activity.BluetoothControlActivity"/>
         <activity android:name=".activity.RichTextActivity"/>
         <activity android:name=".activity.XmlExtractActivity"/>
+        <activity android:name=".activity.HuanXinActivity"/>
+        <meta-data
+            android:name="design_width"
+            android:value="750" />
+        <meta-data
+            android:name="design_height"
+            android:value="1334" />
+        <!-- 计步服务 -->
+        <service
+            android:name="com.xinjiage.stepdetector.service.StepCounterService"
+            android:label="StepCounterService" />
+
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--数据共享-->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
+        <!--环信start-->
+        <!-- 设置环信应用的AppKey -->
+        <meta-data android:name="EASEMOB_APPKEY"  android:value="1106180828177939#lotterytest" />
+        <!-- 声明SDK所需的service SDK核心功能-->
+        <service android:name="com.hyphenate.chat.EMChatService" android:exported="true"/>
+        <service android:name="com.hyphenate.chat.EMJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:exported="true"
+            />
+        <!-- 声明SDK所需的receiver -->
+        <receiver android:name="com.hyphenate.chat.EMMonitorReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+            <!-- 可选filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
+        <!--环信end-->
     </application>
 
 </manifest>

@@ -56,4 +56,7 @@ public class GameSurfaceView extends BaseSurfaceView {
     public void logic() {
 
     }
+    public void onDestroy(){
+        stop();
+    }
 }

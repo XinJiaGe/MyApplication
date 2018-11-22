@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="80px"
+            android:text="0"
             android:layout_marginTop="20px"
             android:textColor="#000000"/>
     </LinearLayout>

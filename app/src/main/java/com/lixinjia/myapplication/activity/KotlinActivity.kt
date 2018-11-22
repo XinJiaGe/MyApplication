@@ -95,7 +95,7 @@ class KotlinActivity : BaseKotlinActivity()  {
         printLength3("")
         printLength3(1000)
 
-        stringBuilder?.append("\n");
+        stringBuilder?.append("\n")
         stringBuilder?.append("使用循环\n");
         val items = listOf("apple", "banana", "kiwi")
         for (item in items) {
@@ -117,7 +117,7 @@ class KotlinActivity : BaseKotlinActivity()  {
         }
 
         stringBuilder?.append("\n");
-        stringBuilder?.append("使用 when 表达式\n");
+        stringBuilder?.append("使用 when 表达式\n")
         fun describe(obj: Any): String =
             when (obj) {
                 1          -> "One"
@@ -133,8 +133,8 @@ class KotlinActivity : BaseKotlinActivity()  {
         stringBuilder?.append(describe("other")+"\n")
 
         stringBuilder?.append("\n");
-        stringBuilder?.append("使用ranges\n");
-        stringBuilder?.append("检查 in 操作符检查数值是否在某个范围内：\n");
+        stringBuilder?.append("使用ranges\n")
+        stringBuilder?.append("检查 in 操作符检查数值是否在某个范围内：\n")
         val x2 = 10
         val y2 = 9
         if (x2 in 1..y2+1) {
@@ -142,7 +142,7 @@ class KotlinActivity : BaseKotlinActivity()  {
         }
 
         stringBuilder?.append("\n");
-        stringBuilder?.append("检查数值是否在范围外：\n");
+        stringBuilder?.append("检查数值是否在范围外：\n")
         val list = listOf("a", "b", "c")
         if (-1 !in 0..list.lastIndex) {
             stringBuilder?.append("-1 is out of range\n")
