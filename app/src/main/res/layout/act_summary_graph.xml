@@ -10,15 +10,15 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="bing"
-            android:layout_weight="1"
-            android:text="饼"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:onClick="zhuzi"
             android:layout_weight="1"
             android:text="柱状"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="hengzhuzhuang"
+            android:layout_weight="1"
+            android:text="横向柱状"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,6 +54,18 @@
             android:onClick="zhizheng"
             android:layout_weight="1"
             android:text="指针"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="bing"
+            android:layout_weight="1"
+            android:text="饼"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="huan"
+            android:layout_weight="1"
+            android:text="环"/>
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"

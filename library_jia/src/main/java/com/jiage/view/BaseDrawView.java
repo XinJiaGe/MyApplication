@@ -249,11 +249,18 @@ public class BaseDrawView extends View {
      * @return
      */
     protected boolean isClickCircularView(float touchX, float touchY, int circularX, int circularY, int circularRadius) {
-        circularRadius += adaptation.setCanvasAdaptation(10);
-        if (touchX >= circularX - circularRadius * 2 && touchX <= circularX + circularRadius / 2 && touchY >= circularY - circularRadius * 2 && touchY <= circularY + circularRadius / 2) {
-            return true;
+        //点击位置x坐标与圆心的x坐标的距离
+        int distanceX = (int) Math.abs(circularX-touchX);
+        //点击位置y坐标与圆心的y坐标的距离
+        int distanceY = (int) Math.abs(circularY-touchY);
+        //点击位置与圆心的直线距离
+        int distanceZ = (int) Math.sqrt(Math.pow(distanceX,2)+Math.pow(distanceY,2));
+
+        //如果点击位置与圆心的距离大于圆的半径，证明点击位置没有在圆内
+        if(distanceZ > circularRadius){
+            return false;
         }
-        return false;
+        return true;
     }
 
     /*---------------------------------

@@ -47,6 +47,15 @@ public class Adaptation {
         int a = Math.round(value * RATIO);
         return a;
     }
+    /**
+     * 用于适配不同分辨率的值
+     * @param value   值
+     * @return
+     */
+    public double setCanvasAdaptation(double value){
+        double a = Math.round(value * RATIO);
+        return a;
+    }
 
     /**
      * 获取paint真实高度
@@ -81,6 +90,24 @@ public class Adaptation {
         HashMap<String ,Integer> map = new HashMap<>();
         min=max=value[0];
         for(i=0;i<value.length;i++){
+            if(value[i]>max)   // 判断最大值
+                max=value[i];
+            if(value[i]<min)   // 判断最小值
+                min=value[i];
+        }
+        map.put("max",max);
+        map.put("min",min);
+        return map;
+    }/**
+     * 获取数组里面的最大值和最小值
+     * @param value
+     * @return
+     */
+    public HashMap<String, Double> getValueMaxMin(double[] value){
+        double min,max;
+        HashMap<String ,Double> map = new HashMap<>();
+        min=max=value[0];
+        for(int i=0;i<value.length;i++){
             if(value[i]>max)   // 判断最大值
                 max=value[i];
             if(value[i]<min)   // 判断最小值

@@ -12,6 +12,7 @@ import com.jiage.view.PieChartView;
 import com.jiage.view.ShapePointView;
 import com.jiage.view.SpotLineView;
 import com.jiage.view.StraightLineView;
+import com.jiage.view.TransverseHistogramView;
 import com.lixinjia.myapplication.R;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * 作者：李忻佳
  * 日期：2018/11/1
- * 说明：
+ * 说明：统计图
  */
 
 public class SummaryGraphActivity extends BaseActivity {
@@ -36,6 +37,7 @@ public class SummaryGraphActivity extends BaseActivity {
     private ShapePointView spotView;
     private StraightLineView straightLineView;
     private HistogramView histogramView;
+    private TransverseHistogramView transverseHistogramView;
 
     @Override
     public int bindLayout() {
@@ -53,25 +55,40 @@ public class SummaryGraphActivity extends BaseActivity {
         init();
     }
 
-    public void bing(View view){
+
+    public void huan(View view) {
+        huan();
+    }
+
+    public void hengzhuzhuang(View view) {
+        hengzhuzhuang();
+    }
+
+    public void bing(View view) {
         bingzi();
     }
-    public void zhizheng(View view){
+
+    public void zhizheng(View view) {
         yuanZheng();
     }
-    public void zhedian(View view){
+
+    public void zhedian(View view) {
         zheXianData();
     }
-    public void dian(View view){
+
+    public void dian(View view) {
         dianData();
     }
-    public void zhexian(View view){
+
+    public void zhexian(View view) {
         zheDianData();
     }
-    public void zhuzi(View view){
+
+    public void zhuzi(View view) {
         zhuData();
     }
-    public void qinkong(View view){
+
+    public void qinkong(View view) {
         qinKong();
     }
 
@@ -80,11 +97,89 @@ public class SummaryGraphActivity extends BaseActivity {
     }
 
     /**
+     * 环形
+     */
+    private void huan() {
+        pieChartView = new PieChartView(this);
+        pieChartView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, width - width / 3));
+        pieChartView.setRingWidth(80);
+        pieChartView.setClick(true);
+        pieChartView.setClickRingWidth(110);
+        pieChartView.setClickWidth(40);
+        pieChartView.setRingDistance(2);
+        pieChartView.setDataText(false);
+        String[] data = new String[4];
+        data[0] = "20.5";
+        data[1] = "30.8";
+        data[2] = "40";
+        data[3] = "60";
+        pieChartView.setData(data);
+        String[] details = new String[4];
+        details[0] = "我就是我";
+        details[1] = "不一样的烟火";
+        details[2] = "哈哈";
+        details[3] = "呵呵呵";
+        pieChartView.setDetails(details);
+        int[] color = new int[4];
+        color[0] = Color.parseColor("#FBD84F");
+        color[1] = Color.parseColor("#39D670");
+        color[2] = Color.parseColor("#FBAF1E");
+        color[3] = Color.parseColor("#F84945");
+        pieChartView.setDataColor(color);
+        linearLayout.addView(pieChartView);
+    }
+
+    /**
+     * 横向柱状
+     */
+    private void hengzhuzhuang() {
+        transverseHistogramView = new TransverseHistogramView(this);
+        transverseHistogramView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, width - width / 4));
+        transverseHistogramView.setCompany("次");
+        //数据
+        String[] data = new String[5];
+        data[0] = "140";
+        data[1] = "200";
+        data[2] = "400";
+        data[3] = "500";
+        data[4] = "600";
+        transverseHistogramView.setXData(data);
+        transverseHistogramView.setxValueMax(adaptation.getValueMaxLargeValue(adaptation.getValueMaxMin(data).get("max")));
+        //描述
+        String[] text = new String[5];
+        text[0] = "精神科";
+        text[1] = "外科";
+        text[2] = "内科";
+        text[3] = "妇产科";
+        text[4] = "皮肤科";
+        transverseHistogramView.setXText(text);
+        //柱体颜色
+        String[] color = new String[5];
+        color[0] = "#CDEDE4";
+        color[1] = "#FADADD";
+        color[2] = "#CDEDE4";
+        color[3] = "#FADADD";
+        color[4] = "#CDEDE4";
+        transverseHistogramView.setColors(color);
+        //柱体边框颜色
+        String[] borderColor = new String[5];
+        borderColor[0] = "#04A777";
+        borderColor[1] = "#E84855";
+        borderColor[2] = "#04A777";
+        borderColor[3] = "#E84855";
+        borderColor[4] = "#04A777";
+        transverseHistogramView.setBorderColors(borderColor);
+        transverseHistogramView.setDataText(true);
+        linearLayout.addView(transverseHistogramView);
+    }
+
+    /**
      * 柱状图
      */
-    private void zhuData(){
+    private void zhuData() {
         histogramView = new HistogramView(this);
-        histogramView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,width-width/4));
+        histogramView.setDataXRightlength(60);
+        histogramView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, width - width / 4));
         //数据
         String[] data = new String[24];
         data[0] = "0";
@@ -172,14 +267,16 @@ public class SummaryGraphActivity extends BaseActivity {
         histogramView.setDataText(true);
         linearLayout.addView(histogramView);
     }
+
     /**
      * 折线
      */
-    private void zheDianData(){
+    private void zheDianData() {
         straightLineView = new StraightLineView(this);
-        straightLineView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,width-width/4));
+        straightLineView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, width - width / 4));
         straightLineView.setYValueMax(10000);
         straightLineView.setYValueMin(-10000);
+        straightLineView.setDataXRightlength(40);
         straightLineView.setSplitLine(true);
         straightLineView.setTitle(true);
         straightLineView.setRing(true);
@@ -413,12 +510,14 @@ public class SummaryGraphActivity extends BaseActivity {
         straightLineView.setTargetValueTitleRightText(targetValueTitleRightText);
         linearLayout.addView(straightLineView);
     }
+
     /**
      * 点图
      */
-    private void dianData(){
+    private void dianData() {
         spotView = new ShapePointView(this);
-        spotView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,width-width/4));
+        spotView.setDataXRightlength(60);
+        spotView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, width - width / 4));
         spotView.setDataText(true);
         //X轴的text右边的图片
         int[] imgas2 = new int[5];
@@ -495,18 +594,18 @@ public class SummaryGraphActivity extends BaseActivity {
         spotView.setTitleLeftImgheight(100);
         spotView.setTitleRight(true);
 
-        List<HashMap<String,Object>> titleRightList = new ArrayList<>();
+        List<HashMap<String, Object>> titleRightList = new ArrayList<>();
         HashMap<String, Object> map1 = new HashMap<String, Object>();
-        map1.put("color",Color.RED);
-        map1.put("text","哈哈");
+        map1.put("color", Color.RED);
+        map1.put("text", "哈哈");
         map1.put("type", "1");
         HashMap<String, Object> map2 = new HashMap<String, Object>();
-        map2.put("color",Color.DKGRAY);
-        map2.put("text","二哈");
+        map2.put("color", Color.DKGRAY);
+        map2.put("text", "二哈");
         map2.put("type", "2");
         HashMap<String, Object> map3 = new HashMap<String, Object>();
-        map3.put("color",Color.BLUE);
-        map3.put("text","一哈");
+        map3.put("color", Color.BLUE);
+        map3.put("text", "一哈");
         map3.put("type", "3");
         titleRightList.add(map1);
         titleRightList.add(map2);
@@ -515,12 +614,14 @@ public class SummaryGraphActivity extends BaseActivity {
 
         linearLayout.addView(spotView);
     }
+
     /**
      * 折线图
      */
-    private void zheXianData(){
+    private void zheXianData() {
         lineView = new SpotLineView(this);
-        lineView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,width-width/4));
+        lineView.setDataXRightlength(40);
+        lineView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, width - width / 4));
         lineView.setDataText(true);
         //数据集合
         List<int[]> listData = new ArrayList<>();
@@ -639,19 +740,19 @@ public class SummaryGraphActivity extends BaseActivity {
         lineView.setTitleLeftImgheight(100);
         lineView.setTitleRight(true);
 
-        List<HashMap<String,Object>> titleRightList = new ArrayList<>();
+        List<HashMap<String, Object>> titleRightList = new ArrayList<>();
         HashMap<String, Object> map1 = new HashMap<String, Object>();
-        map1.put("hollow",true);
-        map1.put("color",Color.RED);
-        map1.put("text","哈哈");
+        map1.put("hollow", true);
+        map1.put("color", Color.RED);
+        map1.put("text", "哈哈");
         HashMap<String, Object> map2 = new HashMap<String, Object>();
-        map2.put("hollow",false);
-        map2.put("color",Color.DKGRAY);
-        map2.put("text","二哈");
+        map2.put("hollow", false);
+        map2.put("color", Color.DKGRAY);
+        map2.put("text", "二哈");
         HashMap<String, Object> map3 = new HashMap<String, Object>();
-        map3.put("hollow",true);
-        map3.put("color",Color.BLUE);
-        map3.put("text","一哈");
+        map3.put("hollow", true);
+        map3.put("color", Color.BLUE);
+        map3.put("text", "一哈");
         titleRightList.add(map1);
         titleRightList.add(map2);
         titleRightList.add(map3);
@@ -659,12 +760,13 @@ public class SummaryGraphActivity extends BaseActivity {
 
         linearLayout.addView(lineView);
     }
+
     /**
      * 圆形指针
      */
-    private void yuanZheng(){
+    private void yuanZheng() {
         pieChartPointer = new PieChartPointerView(this);
-        pieChartPointer.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,width+width/7));
+        pieChartPointer.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, width + width / 7));
         pieChartPointer.setPointerData("30");
         pieChartPointer.setTitle("BmI");
         pieChartPointer.setTitle2("健康体重");
@@ -690,12 +792,13 @@ public class SummaryGraphActivity extends BaseActivity {
         pieChartPointer.setDataDescribe(dataDescribe);
         linearLayout.addView(pieChartPointer);
     }
+
     /**
-     * 可旋转的饼图
+     * 饼图
      */
     private void bingzi() {
         pieChartView = new PieChartView(this);
-        pieChartView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,width-width/4));
+        pieChartView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, width - width / 4));
 
         pieChartView.setTitle(true);
         pieChartView.setTitleHeights(140);
@@ -721,7 +824,7 @@ public class SummaryGraphActivity extends BaseActivity {
         linearLayout.addView(pieChartView);
     }
 
-    private void init(){
+    private void init() {
         adaptation = new Adaptation(this);
         WindowManager wm = this.getWindowManager();
         width = wm.getDefaultDisplay().getWidth();
