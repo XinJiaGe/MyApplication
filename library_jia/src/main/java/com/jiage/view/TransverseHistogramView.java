@@ -4,7 +4,9 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import com.jiage.util.JiaUtil;
 
@@ -19,6 +21,10 @@ public class TransverseHistogramView extends BaseDrawView {
      * 柱子宽度最大数据
      */
     private int xValueMax = 0;
+    /**
+     * 柱子透明度
+     */
+    private int columnAlpha = 100;
     /**
      * 柱子的高
      */
@@ -48,10 +54,6 @@ public class TransverseHistogramView extends BaseDrawView {
      */
     private String[] colors;
     /**
-     * 边框颜色
-     */
-    private String[] borderColors;
-    /**
      * 字体大小
      */
     private int textSize = 50;
@@ -62,7 +64,7 @@ public class TransverseHistogramView extends BaseDrawView {
     /**
      * 离右边距距离
      */
-    private int rightDistance = 0;
+    private int rightDistance = 10;
     /**
      * 离左边边距距离
      */
@@ -75,7 +77,7 @@ public class TransverseHistogramView extends BaseDrawView {
     private int topProgressively = 5;
     private int widthProgressively = 0;
 
-    public TransverseHistogramView(Context context) {
+    public  TransverseHistogramView(Context context) {
         super(context);
     }
 
@@ -100,21 +102,23 @@ public class TransverseHistogramView extends BaseDrawView {
      */
     private void canvasColumn() {
         topProgressively = 5;
-        widthProgressively = adaptation.screenWidth - rightDistance - leftDistance;
-        mPaint.setTextSize(textSize);
+        widthProgressively = mWidth - rightDistance - leftDistance;
+        mPaint.setTextSize(adaptation.setCanvasAdaptation(textSize));
         for (int i = 0; i < XText.length; i++) {
             String text = XText[i];
             //绘制柱体
             mPaint.setColor((colors != null && colors.length != XText.length) ? Color.BLACK : Color.parseColor(colors[i]));
+            mPaint.setAlpha(columnAlpha);
             mPaint.setStyle(Paint.Style.FILL);//设置填满
-            double width = widthProgressively * XData[i] / xValueMax;
-            mCanvas.drawRect(adaptation.setCanvasAdaptation(leftDistance), adaptation.setCanvasAdaptation(topProgressively), (float) adaptation.setCanvasAdaptation(width),
-                    adaptation.setCanvasAdaptation(topProgressively) + adaptation.setCanvasAdaptation(columnHeight), mPaint);// 长方形
+            double width = adaptation.setCanvasAdaptation(widthProgressively) * XData[i] / xValueMax;
+            Rect rect = new Rect(adaptation.setCanvasAdaptation(leftDistance), adaptation.setCanvasAdaptation(topProgressively),
+                    (int) (adaptation.setCanvasAdaptation(leftDistance)+ width),
+                    adaptation.setCanvasAdaptation(topProgressively) + adaptation.setCanvasAdaptation(columnHeight));
+            mCanvas.drawRect(rect, mPaint);// 长方形
             //绘制边框
-            mPaint.setColor((borderColors != null && borderColors.length != XText.length) ? Color.BLACK : Color.parseColor(borderColors[i]));
+            mPaint.setAlpha(255);
             mPaint.setStyle(Paint.Style.STROKE);//设置不填满
-            mCanvas.drawRect(adaptation.setCanvasAdaptation(leftDistance), adaptation.setCanvasAdaptation(topProgressively), (float) adaptation.setCanvasAdaptation(width),
-                    adaptation.setCanvasAdaptation(topProgressively) + adaptation.setCanvasAdaptation(columnHeight), mPaint);// 长方形
+            mCanvas.drawRect(rect, mPaint);// 长方形
             //绘制描述
             mPaint.setTextAlign(Paint.Align.LEFT);
             int textW = getTextWH(text, mPaint).width();
@@ -122,16 +126,19 @@ public class TransverseHistogramView extends BaseDrawView {
             //获取当前线到baseline线的距离
             Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
             float y = (fontMetrics.descent - fontMetrics.ascent);
-            if (width < textW + textP + dataW) {
-                mCanvas.drawText(text, (float) adaptation.setCanvasAdaptation(width + textP), (float) adaptation.setCanvasAdaptation(topProgressively + y), mPaint);
+            Log.e("TransverseHistogramView","y:"+y+"   columnHeight:"+adaptation.setCanvasAdaptation(columnHeight));
+            if (width < textW + adaptation.setCanvasAdaptation(textP) + dataW) {
+                mCanvas.drawText(text, (float) width+adaptation.setCanvasAdaptation(leftDistance) + adaptation.setCanvasAdaptation(textP),
+                        (float) adaptation.setCanvasAdaptation(topProgressively) + y, mPaint);
                 //绘制数据
-                mCanvas.drawText(JiaUtil.deleteDecimal(XData[i]) + company, (float) adaptation.setCanvasAdaptation(width + textP * 2 + textW),
-                        (float) adaptation.setCanvasAdaptation(topProgressively + y), mPaint);
+                mCanvas.drawText(JiaUtil.deleteDecimal(XData[i]) + company,
+                        (float) width +adaptation.setCanvasAdaptation(leftDistance)+ adaptation.setCanvasAdaptation(textP * 2 )+ textW,
+                        (float) adaptation.setCanvasAdaptation(topProgressively )+ y, mPaint);
             } else {
-                mCanvas.drawText(text, adaptation.setCanvasAdaptation(textP + leftDistance), (float) adaptation.setCanvasAdaptation(topProgressively + y), mPaint);
+                mCanvas.drawText(text, adaptation.setCanvasAdaptation(textP + leftDistance), (float) adaptation.setCanvasAdaptation(topProgressively) + y, mPaint);
                 //绘制数据
-                mCanvas.drawText(JiaUtil.deleteDecimal(XData[i]) + company, (float) adaptation.setCanvasAdaptation(width + textP - dataW),
-                        (float) adaptation.setCanvasAdaptation(topProgressively + y), mPaint);
+                mCanvas.drawText(JiaUtil.deleteDecimal(XData[i]) + company, (float) width + adaptation.setCanvasAdaptation(textP )- dataW,
+                        (float) adaptation.setCanvasAdaptation(topProgressively )+ y, mPaint);
             }
             topProgressively += (columnHeight + interval);
         }
@@ -217,14 +224,6 @@ public class TransverseHistogramView extends BaseDrawView {
         this.colors = colors;
     }
 
-    public String[] getBorderColors() {
-        return borderColors;
-    }
-
-    public void setBorderColors(String[] borderColors) {
-        this.borderColors = borderColors;
-    }
-
     public int getRightDistance() {
         return rightDistance;
     }
@@ -247,5 +246,13 @@ public class TransverseHistogramView extends BaseDrawView {
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    public int getColumnAlpha() {
+        return columnAlpha;
+    }
+
+    public void setColumnAlpha(int columnAlpha) {
+        this.columnAlpha = columnAlpha;
     }
 }

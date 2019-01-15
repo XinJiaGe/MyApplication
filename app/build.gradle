@@ -43,52 +43,71 @@ dependencies {
     compile 'com.android.support:design:27.1.1'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:27.1.1'
+
     //处理方法超过64K
     implementation 'com.android.support:multidex:1.0.3'
+
     //屏幕适配
     compile 'com.zhy:autolayout:1.4.5'
+
     //魅族指纹识别
     compile files('libs/fingerprint.jar')
+
     //kotlin
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
     //EventBus
     compile files('libs/eventbus-1.5-src-modify.jar')
+
     //OkHttp
     compile 'com.squareup.okhttp3:okhttp:3.10.0'
+
     //银行卡扫描
     compile 'io.card:android-sdk:5.4.2'
+
     //富文本编辑器
     compile 'jp.wasabeef:richeditor-android:1.2.2'
+
     //上下滚动
     implementation 'com.sunfusheng:marqueeview:1.3.3'
+
     //Recyclerview
     implementation project(':library_LRecyclerview')
+
     //计步
     compile project(':library_stepdetector')
+
     //消息点
     implementation project(':library_BGABadgeView')
+
     //xutils3
     implementation project(':library_xutils3.3.40')
+
     //RxJava
     compile 'io.reactivex.rxjava2:rxjava:2.1.1'
+
     //轮播
     implementation project(':library_banner1.4.10')
+
     //讯飞
     implementation project(':library_xunfei')
+
     //环信
     implementation project(':library_huanxing3.5.1')
+
     //切换动画  SpringIndicator
     implementation 'com.github.chenupt.android:springindicator:1.0.2@aar'
+
     //炫酷计时器
-    implementation(group: 'com.jiahuan.timelyanimation', name: 'timelyanimation', version: '0.5.0', ext: 'aar')
+    implementation 'com.jiahuan.timelyanimation:timelyanimation:0.5.0@aar'
+
     //CheckBox切换 SwitchButton
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
-
-
     implementation project(':library_jia')
     implementation project(':library_calendar')
     implementation project(':library_utilcode')
     implementation project(':library_drawable')
+    implementation project(':library_ACRCloud')
 }
 repositories {
     mavenCentral()

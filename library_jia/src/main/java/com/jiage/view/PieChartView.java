@@ -1,5 +1,6 @@
 package com.jiage.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -29,7 +30,7 @@ public class PieChartView extends BaseDrawCakeView {
     /**
      * 环宽
      */
-    private int ringWidth = 250;
+    private int ringWidth = 200;
     /**
      * 环之间距离间隔
      */
@@ -94,6 +95,31 @@ public class PieChartView extends BaseDrawCakeView {
      * 是否可以点击
      */
     private boolean isClick = false;
+    /**
+     * 描述
+     */
+    private String describe = "总量";
+    /**
+     * 描述字体颜色
+     */
+    private int describeColor = Color.GRAY;
+    /**
+     * 描述字体大小
+     */
+    private int describeSize = 40;
+    /**
+     * 总量字体颜色
+     */
+    private int totalColor = Color.BLACK;
+    /**
+     * 总量字体大小
+     */
+    private int totalSize = 60;
+    /**
+     * 是否显示描述
+     */
+    private boolean isDescribe = false;
+
     private String[] details;
     private int x, y;
     private float downX, downY;
@@ -104,6 +130,7 @@ public class PieChartView extends BaseDrawCakeView {
     private Region[] mRegion;
     private float left, right, top, bottom;
 
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -162,7 +189,7 @@ public class PieChartView extends BaseDrawCakeView {
                 mPaint.setTextAlign(Paint.Align.CENTER);
                 mPaint.setTextSize(adaptation.setCanvasAdaptation(textSize));
                 if (Float.parseFloat(mData[i]) > 10 && dataText) {
-                    String text = null;
+                    String text;
                     try {
                         text = (Float.parseFloat(mData[i]) == Integer.parseInt(mData[i]) ? Integer.parseInt(mData[i]) : mData[i]) + "%";
                     } catch (NumberFormatException e) {
@@ -171,6 +198,7 @@ public class PieChartView extends BaseDrawCakeView {
                     }
                     setCircleCoordinates(text, x, y, startAngle - 90 + dataAngle[i] / 2, radius - adaptation.setCanvasAdaptation(ringWidth) / 2, mCanvas, mPaint);
                 }
+                //获取点击范围
                 Region region = new Region();
                 Path ovalPath = new Path();
                 ovalPath.moveTo(x, y);
@@ -178,7 +206,6 @@ public class PieChartView extends BaseDrawCakeView {
                         (float) getCircleCoordinatesY(y, sss(startAngle), radius - adaptation.setCanvasAdaptation(panding)));
                 ovalPath.addArc(oval, startAngle, dataAngle[i]);
                 ovalPath.lineTo(x, y);
-                Log.e("onTouchDown", "x:" + x + " y:" + y + " tox:" + getCircleCoordinatesX(x, startAngle, radius) + " toy:" + getCircleCoordinatesY(y, startAngle, radius));
                 RectF r = new RectF();
                 ovalPath.computeBounds(r, true);
                 region.setPath(ovalPath, new Region((int) r.left, (int) r.top, (int) r.right, (int) r.bottom));
@@ -189,6 +216,19 @@ public class PieChartView extends BaseDrawCakeView {
             mPaint.setColor(Color.WHITE);
             mCanvas.drawCircle(x, y, radius - adaptation.setCanvasAdaptation(ringWidth) - adaptation.setCanvasAdaptation(panding), mPaint);// 小圆
 
+            if(isDescribe) {
+                //绘制中间描述
+                mPaint.setColor(describeColor);
+                mPaint.setTextSize(adaptation.setCanvasAdaptation(describeSize));
+                mCanvas.drawText(describe, x, y - adaptation.setCanvasAdaptation(20), mPaint);
+                int describeh = getTextWH(describe, mPaint).height();
+                //绘制中间总量
+                mPaint.setColor(totalColor);
+                mPaint.setTextSize(adaptation.setCanvasAdaptation(totalSize));
+                mCanvas.drawText(maxValue + "", x, y + describeh, mPaint);
+            }
+
+            //绘制数据
             if (mDataText != null) {
                 mPaint.setTextAlign(Paint.Align.RIGHT);
                 int titleRightRightDistanceStart = getWidth() - adaptation.setCanvasAdaptation(titleRightRightDistance);
@@ -213,6 +253,7 @@ public class PieChartView extends BaseDrawCakeView {
                         mPaint.setAlpha(180);
                         mPaint.setStyle(Paint.Style.FILL);
                         mPaint.setStrokeWidth(1);
+                        mPaint.setTextSize(adaptation.setCanvasAdaptation(30));
                         Rect textWH = getTextWH(details[i], mPaint);
                         mPaint.setStrokeWidth(5);
                         float w = textWH.width() + adaptation.setCanvasAdaptation(100);
@@ -244,29 +285,46 @@ public class PieChartView extends BaseDrawCakeView {
         this.downX = downX;
         this.downY = downY;
         if (isClick) {
-            for (int i = 0; i < mRegion.length; i++) {
-                Region region = mRegion[i];
-                if (region != null) {
-                    boolean b = region.contains((int) downX, (int) downY);
-                    if (b) {
-                        boolean xiao = isClickCircularView(downX, downY, x, y, radius - adaptation.setCanvasAdaptation(ringWidth) - adaptation.setCanvasAdaptation(panding));
-                        if (!xiao) {
-                            clicks = new Boolean[mData.length];
-                            for (int i1 = 0; i1 < clicks.length; i1++) {
-                                if (i == i1) {
-                                    clicks[i1] = true;
-                                } else {
-                                    clicks[i1] = false;
+//            if(clicks == null) {
+                for (int i = 0; i < mRegion.length; i++) {
+                    Region region = mRegion[i];
+                    if (region != null) {
+                        boolean b = region.contains((int) downX, (int) downY);
+                        if (b) {
+                            boolean xiao = isClickCircularView(downX, downY, x, y, radius - adaptation.setCanvasAdaptation(ringWidth) - adaptation.setCanvasAdaptation(panding));
+                            if (!xiao) {
+                                clicks = new Boolean[mData.length];
+                                for (int i1 = 0; i1 < clicks.length; i1++) {
+                                    if (i == i1) {
+                                        clicks[i1] = true;
+                                    } else {
+                                        clicks[i1] = false;
+                                    }
                                 }
+                                invalidate();
+                                break;
+                            }else{
+                                clicks = null;
+                                invalidate();
                             }
+                        }else{
+                            clicks = null;
                             invalidate();
-                            Log.e("onTouchDown", "onTouchEvent: b: " + b + " x: " + downX + "  y: " + downY + "  " + mData[i]);
                         }
-                        break;
                     }
                 }
-            }
+//            }else{
+//                clicks = null;
+//                invalidate();
+//            }
         }
+    }
+    /**
+     * 初始化点击选点
+     */
+    public void initClick(){
+        clicks = null;
+        invalidate();
     }
 
     /**
@@ -447,5 +505,53 @@ public class PieChartView extends BaseDrawCakeView {
      */
     public void setDetails(String[] details) {
         this.details = details;
+    }
+
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
+    }
+
+    public int getDescribeColor() {
+        return describeColor;
+    }
+
+    public void setDescribeColor(int describeColor) {
+        this.describeColor = describeColor;
+    }
+
+    public int getDescribeSize() {
+        return describeSize;
+    }
+
+    public void setDescribeSize(int describeSize) {
+        this.describeSize = describeSize;
+    }
+
+    public int getTotalColor() {
+        return totalColor;
+    }
+
+    public void setTotalColor(int totalColor) {
+        this.totalColor = totalColor;
+    }
+
+    public int getTotalSize() {
+        return totalSize;
+    }
+
+    public void setTotalSize(int totalSize) {
+        this.totalSize = totalSize;
+    }
+
+    public boolean isDescribe() {
+        return isDescribe;
+    }
+
+    public void setDescribe(boolean describe) {
+        isDescribe = describe;
     }
 }

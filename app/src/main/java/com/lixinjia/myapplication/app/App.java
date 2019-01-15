@@ -69,6 +69,7 @@ public class App extends MultiDexApplication {
         //xUtils3
         x.Ext.init(this);
         x.Ext.setDebug(isDebug); //输出debug日志，开启会影响性能
+        //初始化环形
         initHuanXin();
     }
 

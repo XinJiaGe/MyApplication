@@ -30,9 +30,13 @@ public class BaseDrawGridView extends BaseDrawView {
      */
     public int Y;
     /**
-     * 是否绘制XY轴
+     * 是否绘制X轴
      */
-    private boolean isXY = false;
+    private boolean isX = false;
+    /**
+     * 是否绘制Y轴
+     */
+    private boolean isY = false;
     /**
      * XY轴线条粗细
      */
@@ -116,7 +120,7 @@ public class BaseDrawGridView extends BaseDrawView {
     /**
      * Y轴上的网格的最上面的一条网格离上的距离
      */
-    private int gridYFromTop = getTitleHeight() + 50;
+    private int gridYFromTop = getTitleHeight() + 100;
 
     /**
      * 是否显示X轴上的text
@@ -360,6 +364,13 @@ public class BaseDrawGridView extends BaseDrawView {
                     Path path = new Path();
                     path.moveTo(start, startHeight);
                     path.lineTo(end, startHeight);
+                    mPaint = new Paint();
+                    mPaint.reset();
+                    mPaint.setStyle(Paint.Style.STROKE);
+                    mPaint.setStrokeWidth(adaptation.setCanvasAdaptation(gridWidth));
+                    mPaint.setColor(gridColor);
+                    mPaint.setAntiAlias(true);
+                    mPaint.setPathEffect(pathEffect);
                     mCanvas.drawPath(path, mPaint);
                 }
                 if (YZeroTextIndex != 0) {
@@ -541,16 +552,18 @@ public class BaseDrawGridView extends BaseDrawView {
      * 绘制坐标轴
      */
     public void canvasCoordinate() {
-        if (isXY) {
+        if (isX) {
+            //X
+            mPaint.setColor(YColor);
+            mCanvas.drawLine(X, Y, mWidth, Y, mPaint);
+        }
+        if (isY) {
             mPaint = new Paint();
             //设置线条粗细
             mPaint.setStrokeWidth(adaptation.setCanvasAdaptation(XYWidth));
             //Y
             mPaint.setColor(XColor);
             mCanvas.drawLine(X, Y, X, adaptation.setCanvasAdaptation(gridYFromTop) - adaptation.setCanvasAdaptation(gridUpExceedgridYFromTop), mPaint);
-            //X
-            mPaint.setColor(YColor);
-            mCanvas.drawLine(X, Y, mWidth, Y, mPaint);
         }
     }
 
@@ -798,12 +811,20 @@ public class BaseDrawGridView extends BaseDrawView {
         this.YCompanyText = YCompanyText;
     }
 
-    public boolean isXY() {
-        return isXY;
+    public boolean isX() {
+        return isX;
     }
 
-    public void setXY(boolean XY) {
-        isXY = XY;
+    public void setX(boolean x) {
+        isX = x;
+    }
+
+    public boolean isY() {
+        return isY;
+    }
+
+    public void setY(boolean y) {
+        isY = y;
     }
 
     public int getmWidth() {

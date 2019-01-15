@@ -22,9 +22,9 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="zhexian"
+            android:onClick="zhizheng"
             android:layout_weight="1"
-            android:text="折线"/>
+            android:text="指针"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -41,19 +41,13 @@
             android:layout_height="wrap_content"
             android:onClick="dian"
             android:layout_weight="1"
-            android:text="形状"/>
+            android:text="形状点"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="zhedian"
             android:layout_weight="1"
             android:text="折线点"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="zhizheng"
-            android:layout_weight="1"
-            android:text="指针"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,6 +60,31 @@
             android:onClick="huan"
             android:layout_weight="1"
             android:text="环"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="zhexian"
+            android:layout_weight="1"
+            android:text="折线"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="zhexianhua"
+            android:layout_weight="1"
+            android:text="折线滑动回调"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="zhexiandianji"
+            android:layout_weight="1"
+            android:text="形状点击"/>
+
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"

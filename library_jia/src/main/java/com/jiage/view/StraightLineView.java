@@ -6,8 +6,11 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,6 +118,51 @@ public class StraightLineView extends BaseDrawGridView {
      * 柱体上方的数据text的大小
      */
     private int dataTextSize = 30;
+    /**
+     * 是否显示圆与线之间的距离
+     */
+    private boolean isCircularLineDistance = false;
+    /**
+     * 圆与线之间的距离
+     */
+    private int circularLineDistance = 5;
+    /**
+     * 是否可以点击查看数据
+     */
+    private boolean isClick = false;
+    /**
+     * 点击后圆环增加的宽度
+     */
+    private int clickWidth = 10;
+
+    /**
+     * 是否可以滑动选择
+     */
+    private boolean isSlideSelect = false;
+    /**
+     * 滑动选择的时候线条的颜色
+     */
+    private int slideSelectYColor = Color.BLACK;
+    /**
+     * 滑动选择的时候线条的宽度
+     */
+    private int slideSelectYWidth = 1;
+    /**
+     * 是否显示最后一条数据的浮框
+     */
+    private boolean isTheLastDay = false;
+    /**
+     * 最后一条数据的浮框的背景颜色
+     */
+    private int theLastDayBgColor = Color.RED;
+    /**
+     * 最后一条数据的浮框的文字颜色
+     */
+    private int theLastDayTextColor = Color.WHITE;
+    /**
+     * 最后一条数据的浮框的文字大小
+     */
+    private int theLastDayTextSieze = 50;
 
 
     private String[] XText;
@@ -128,6 +176,7 @@ public class StraightLineView extends BaseDrawGridView {
     private int[] targetValueColor;
     private int[] XDataRingColor;
     private List<int[]> gradientColor;
+    private int[] gradientColorAlpha;
     private String[] dataTitleRightText;
     private String[] setTargetValueTitleRightText;
     private int titleRightXDistance;
@@ -139,6 +188,13 @@ public class StraightLineView extends BaseDrawGridView {
     private List<double[]> XdataDouble;
     private double[] totalTargetValueDouble;
     private List<double[]> targetValueDouble;
+    private int clicki = -1,clicki1 = -1;
+    private int slideSelectIndex = -1;
+    private int slideSelectIndex1 = -1;
+    private List<String[]> XdataDetails;
+    private float downX,downY;
+    private onStraightLineViewListener mLineListener;
+    private boolean touch = false;
 
     public StraightLineView(Context context) {
         super(context);
@@ -157,7 +213,6 @@ public class StraightLineView extends BaseDrawGridView {
         super.init(context);
         setGridType(GridType.REAL);
         setIsgridY(false);
-        setXY(true);
         setDataXRightlength(adaptation.setCanvasAdaptation(0));
         setGridDownExceedX(adaptation.setCanvasAdaptation(5));
     }
@@ -189,8 +244,11 @@ public class StraightLineView extends BaseDrawGridView {
                         }
                         Shader mShader = new LinearGradient(X, adaptation.setCanvasAdaptation(getGridYFromTop()), X, Y, color, null, Shader.TileMode.REPEAT); // 一个材质,打造出一个线性梯度沿著一条线。
                         mPaint.setShader(mShader);
+                        if(gradientColorAlpha!=null&&gradientColorAlpha.length == Xdata.size()){
+                            mPaint.setAlpha(gradientColorAlpha[i]);
+                        }
                         Path path = new Path();
-                        path.moveTo(X + adaptation.setCanvasAdaptation(getXYWidth() / 2), Y - adaptation.setCanvasAdaptation(getXYWidth()));// 此点为多边形的起点
+                        path.moveTo(X + adaptation.setCanvasAdaptation(getXYWidth() / 2), Y );// 此点为多边形的起点
                         for (int i1 = 0; i1 < dataSize; i1++) {
                             if (i1 == 0) {
                                 path.lineTo(DataXY[i1] + adaptation.setCanvasAdaptation(getXYWidth() / 2), getYValue(Xdata.get(i)[i1]));
@@ -200,12 +258,9 @@ public class StraightLineView extends BaseDrawGridView {
                                 path.lineTo(DataXY[i1], getYValue(Xdata.get(i)[i1]));
                             }
                         }
-                        path.lineTo(DataXY[dataSize - 1] - adaptation.setCanvasAdaptation(getXYWidth() / 2), Y - adaptation.setCanvasAdaptation(getXYWidth()));
+                        path.lineTo(DataXY[dataSize - 1] - adaptation.setCanvasAdaptation(getXYWidth() / 2), Y);
                         path.close(); // 使这些点构成封闭的多边形
                         mCanvas.drawPath(path, mPaint);
-                    }
-                    if (!isBeforeGrid()) {
-                        setGrid();
                     }
                 }
             } else {
@@ -221,7 +276,7 @@ public class StraightLineView extends BaseDrawGridView {
                             Shader mShader = new LinearGradient(X, adaptation.setCanvasAdaptation(getGridYFromTop()), X, Y, color, null, Shader.TileMode.REPEAT); // 一个材质,打造出一个线性梯度沿著一条线。
                             mPaint.setShader(mShader);
                             Path path = new Path();
-                            path.moveTo(X + adaptation.setCanvasAdaptation(getXYWidth() / 2), Y - adaptation.setCanvasAdaptation(getXYWidth()));// 此点为多边形的起点
+                            path.moveTo(X + adaptation.setCanvasAdaptation(getXYWidth() / 2), Y);// 此点为多边形的起点
                             for (int i1 = 0; i1 < dataSize; i1++) {
                                 if (i1 == 0) {
                                     path.lineTo(DataXY[i1] + adaptation.setCanvasAdaptation(getXYWidth() / 2), getYValue(XdataDouble.get(i)[i1]));
@@ -231,12 +286,9 @@ public class StraightLineView extends BaseDrawGridView {
                                     path.lineTo(DataXY[i1], getYValue(XdataDouble.get(i)[i1]));
                                 }
                             }
-                            path.lineTo(DataXY[dataSize - 1] - adaptation.setCanvasAdaptation(getXYWidth() / 2), Y - adaptation.setCanvasAdaptation(getXYWidth()));
+                            path.lineTo(DataXY[dataSize - 1] - adaptation.setCanvasAdaptation(getXYWidth() / 2), Y);
                             path.close(); // 使这些点构成封闭的多边形
                             mCanvas.drawPath(path, mPaint);
-                        }
-                        if (!isBeforeGrid()) {
-                            setGrid();
                         }
                     }
                 }
@@ -329,7 +381,7 @@ public class StraightLineView extends BaseDrawGridView {
                         mPaint.setColor(XdataColor[i]);
                     }
                 } else {
-                    mPaint.setColor(adaptation.setCanvasAdaptation(lineColor));
+                    mPaint.setColor(lineColor);
                 }
                 for (int i1 = 0; i1 < dataSize; i1++) {
                     if (i1 != 0) {
@@ -340,6 +392,43 @@ public class StraightLineView extends BaseDrawGridView {
                             setDataText(DataXY[i1], getYValue(Xdata.get(i)[i1]), Xdata.get(i)[i1], adaptation.setCanvasAdaptation(ringRadius), dataTextColor, adaptation.setCanvasAdaptation(dataTextSize));
                         } else {
                             setDataText(DataXY[i1], getYValue(Xdata.get(i)[i1]), Xdata.get(i)[i1], 0, dataTextColor, adaptation.setCanvasAdaptation(dataTextSize));
+                        }
+                    }
+                    if(isTheLastDay&&i1 == dataSize-1){
+                        mPaint.setTextSize(adaptation.setCanvasAdaptation(theLastDayTextSieze));
+                        Rect text = getTextWH(Xdata.get(i)[i1]+"", mPaint);
+                        int yvalue = getYValue(Xdata.get(i)[i1]);
+                        mPaint.setColor(theLastDayBgColor);
+                        if(yvalue<mHeight/2){
+                            RectF textRect = new RectF(DataXY[i1] - text.width(), yvalue +adaptation.setCanvasAdaptation(40),
+                                    DataXY[i1],yvalue +adaptation.setCanvasAdaptation(40)+text.height());
+                            RectF bgRect = new RectF(textRect.left-adaptation.setCanvasAdaptation(40),textRect.top,
+                                    textRect.right,textRect.bottom+adaptation.setCanvasAdaptation(40));
+                            Path path = new Path();
+                            path.moveTo(DataXY[i1],yvalue+adaptation.setCanvasAdaptation(20));
+                            path.lineTo(DataXY[i1],yvalue+adaptation.setCanvasAdaptation(60));
+                            path.lineTo(DataXY[i1]-adaptation.setCanvasAdaptation(20),yvalue+adaptation.setCanvasAdaptation(60));
+                            path.close();
+                            mCanvas.drawPath(path,mPaint);
+                            mCanvas.drawRoundRect(bgRect, 10, 10, mPaint);//第二个参数是x半径，第三个参数是y半径
+                            mPaint.setTextAlign(Paint.Align.RIGHT);
+                            mPaint.setColor(theLastDayTextColor);
+                            mCanvas.drawText(Xdata.get(i)[i1]+"",DataXY[i1]-(textRect.left-bgRect.left)/2,textRect.bottom+adaptation.setCanvasAdaptation(20),mPaint);
+                        }else{
+                            RectF textRect = new RectF(DataXY[i1] - text.width(), yvalue -adaptation.setCanvasAdaptation(40)-text.height(),
+                                    DataXY[i1],yvalue -adaptation.setCanvasAdaptation(40));
+                            RectF bgRect = new RectF(textRect.left-adaptation.setCanvasAdaptation(40),textRect.top-adaptation.setCanvasAdaptation(40),
+                                    textRect.right,textRect.bottom);
+                            Path path = new Path();
+                            path.moveTo(DataXY[i1],yvalue-adaptation.setCanvasAdaptation(20));
+                            path.lineTo(DataXY[i1],yvalue-adaptation.setCanvasAdaptation(60));
+                            path.lineTo(DataXY[i1]-adaptation.setCanvasAdaptation(20),yvalue-adaptation.setCanvasAdaptation(60));
+                            path.close();
+                            mCanvas.drawPath(path,mPaint);
+                            mCanvas.drawRoundRect(bgRect, 10, 10, mPaint);//第二个参数是x半径，第三个参数是y半径
+                            mPaint.setTextAlign(Paint.Align.RIGHT);
+                            mPaint.setColor(theLastDayTextColor);
+                            mCanvas.drawText(Xdata.get(i)[i1]+"",DataXY[i1]-(textRect.left-bgRect.left)/2,textRect.bottom-adaptation.setCanvasAdaptation(20),mPaint);
                         }
                     }
                 }
@@ -355,7 +444,7 @@ public class StraightLineView extends BaseDrawGridView {
                             mPaint.setColor(XdataColor[i]);
                         }
                     } else {
-                        mPaint.setColor(adaptation.setCanvasAdaptation(lineColor));
+                        mPaint.setColor(lineColor);
                     }
                     for (int i1 = 0; i1 < dataSize; i1++) {
                         if (i1 != 0) {
@@ -368,6 +457,97 @@ public class StraightLineView extends BaseDrawGridView {
                                 setDataText(DataXY[i1], getYValue(XdataDouble.get(i)[i1]), XdataDouble.get(i)[i1], 0, dataTextColor, adaptation.setCanvasAdaptation(dataTextSize));
                             }
                         }
+                        if(isTheLastDay&&i1 == dataSize-1){
+                            mPaint.setTextSize(adaptation.setCanvasAdaptation(theLastDayTextSieze));
+                            Rect text = getTextWH(XdataDouble.get(i)[i1]+"", mPaint);
+                            float yvalue = getYValue(XdataDouble.get(i)[i1]);
+                            mPaint.setColor(theLastDayBgColor);
+                            if(yvalue<mHeight/2){
+                                RectF textRect = new RectF(DataXY[i1] - text.width(), yvalue +adaptation.setCanvasAdaptation(40),
+                                        DataXY[i1],yvalue +adaptation.setCanvasAdaptation(40)+text.height());
+                                RectF bgRect = new RectF(textRect.left-adaptation.setCanvasAdaptation(40),textRect.top,
+                                        textRect.right,textRect.bottom+adaptation.setCanvasAdaptation(40));
+                                Path path = new Path();
+                                path.moveTo(DataXY[i1],yvalue+adaptation.setCanvasAdaptation(20));
+                                path.lineTo(DataXY[i1],yvalue+adaptation.setCanvasAdaptation(60));
+                                path.lineTo(DataXY[i1]-adaptation.setCanvasAdaptation(20),yvalue+adaptation.setCanvasAdaptation(60));
+                                path.close();
+                                mCanvas.drawPath(path,mPaint);
+                                mCanvas.drawRoundRect(bgRect, 10, 10, mPaint);//第二个参数是x半径，第三个参数是y半径
+                                mPaint.setTextAlign(Paint.Align.RIGHT);
+                                mPaint.setColor(theLastDayTextColor);
+                                mCanvas.drawText(XdataDouble.get(i)[i1]+"",DataXY[i1]-(textRect.left-bgRect.left)/2,textRect.bottom+adaptation.setCanvasAdaptation(20),mPaint);
+                            }else{
+                                RectF textRect = new RectF(DataXY[i1] - text.width(), yvalue -adaptation.setCanvasAdaptation(40)-text.height(),
+                                        DataXY[i1],yvalue -adaptation.setCanvasAdaptation(40));
+                                RectF bgRect = new RectF(textRect.left-adaptation.setCanvasAdaptation(40),textRect.top-adaptation.setCanvasAdaptation(40),
+                                        textRect.right,textRect.bottom);
+                                Path path = new Path();
+                                path.moveTo(DataXY[i1],yvalue-adaptation.setCanvasAdaptation(20));
+                                path.lineTo(DataXY[i1],yvalue-adaptation.setCanvasAdaptation(60));
+                                path.lineTo(DataXY[i1]-adaptation.setCanvasAdaptation(20),yvalue-adaptation.setCanvasAdaptation(60));
+                                path.close();
+                                mCanvas.drawPath(path,mPaint);
+                                mCanvas.drawRoundRect(bgRect, 10, 10, mPaint);//第二个参数是x半径，第三个参数是y半径
+                                mPaint.setTextAlign(Paint.Align.RIGHT);
+                                mPaint.setColor(theLastDayTextColor);
+                                mCanvas.drawText(XdataDouble.get(i)[i1]+"",DataXY[i1]-(textRect.left-bgRect.left)/2,textRect.bottom-adaptation.setCanvasAdaptation(20),mPaint);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //绘制移动的时候显示圆点
+        if(isSlideSelect&&touch){
+            if (Xdata != null) {
+                for (int i = 0; i < Xdata.size(); i++) {
+                    for (int i1 = 0; i1 < dataSize; i1++) {
+                        if(i == slideSelectIndex&&i1 == slideSelectIndex1){
+                            if(mLineListener!=null) mLineListener.onSlideSelectListener(slideSelectIndex1,slideSelectIndex,slideSelectIndex1,
+                                    XText[slideSelectIndex1],Xdata.get(slideSelectIndex)[slideSelectIndex1]+"");
+                            mPaint = new Paint();
+                            //设置线条粗细
+                            mPaint.setStrokeWidth(adaptation.setCanvasAdaptation(slideSelectYWidth));
+                            //Y
+                            mPaint.setColor(slideSelectYColor);
+                            mCanvas.drawLine(DataXY[i1], Y, DataXY[i1], adaptation.setCanvasAdaptation(getGridYFromTop()) - adaptation.setCanvasAdaptation(getGridUpExceedgridYFromTop()), mPaint);
+
+                            mPaint = new Paint();
+                            mPaint.setAntiAlias(true);
+                            if (XDataRingColor != null) {
+                                mPaint.setColor(XDataRingColor[i]);
+                            } else {
+                                mPaint.setColor(ringColor);
+                            }
+                            mCanvas.drawCircle(DataXY[i1], getYValue(Xdata.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius+clickWidth), mPaint);
+                        }
+                    }
+                }
+            }else{
+                if (XdataDouble != null) {
+                    for (int i = 0; i < XdataDouble.size(); i++) {
+                        for (int i1 = 0; i1 < dataSize; i1++) {
+                            if(i == slideSelectIndex&&i1 == slideSelectIndex1){
+                                if(mLineListener!=null) mLineListener.onSlideSelectListener(slideSelectIndex1,slideSelectIndex,slideSelectIndex1,
+                                        XText[slideSelectIndex1],XdataDouble.get(slideSelectIndex)[slideSelectIndex1]+"");
+                                mPaint = new Paint();
+                                //设置线条粗细
+                                mPaint.setStrokeWidth(adaptation.setCanvasAdaptation(slideSelectYWidth));
+                                //Y
+                                mPaint.setColor(slideSelectYColor);
+                                mCanvas.drawLine(DataXY[i1], Y, DataXY[i1], adaptation.setCanvasAdaptation(getGridYFromTop()) - adaptation.setCanvasAdaptation(getGridUpExceedgridYFromTop()), mPaint);
+
+                                mPaint = new Paint();
+                                mPaint.setAntiAlias(true);
+                                if (XDataRingColor != null) {
+                                    mPaint.setColor(XDataRingColor[i]);
+                                } else {
+                                    mPaint.setColor(ringColor);
+                                }
+                                mCanvas.drawCircle(DataXY[i1], getYValue(XdataDouble.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius+clickWidth), mPaint);
+                            }
+                        }
                     }
                 }
             }
@@ -376,15 +556,38 @@ public class StraightLineView extends BaseDrawGridView {
         if (isRing) {
             if (Xdata != null) {
                 for (int i = 0; i < Xdata.size(); i++) {
+                    if(isCircularLineDistance) {
+                        mPaint = new Paint();
+                        mPaint.setAntiAlias(true);
+                        for (int i1 = 0; i1 < dataSize; i1++) {
+                            if(i == clicki&&i1 == clicki1){
+                                mPaint.setColor(Color.WHITE);
+                                mCanvas.drawCircle(DataXY[i1], getYValue(Xdata.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius +circularLineDistance+clickWidth), mPaint);
+                            }else{
+                                mPaint.setColor(Color.WHITE);
+                                mCanvas.drawCircle(DataXY[i1], getYValue(Xdata.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius +circularLineDistance), mPaint);
+                            }
+                        }
+                    }
                     mPaint = new Paint();
                     mPaint.setAntiAlias(true);
-                    if (XDataRingColor != null) {
-                        mPaint.setColor(XDataRingColor[i]);
-                    } else {
-                        mPaint.setColor(ringColor);
-                    }
                     for (int i1 = 0; i1 < dataSize; i1++) {
-                        mCanvas.drawCircle(DataXY[i1], getYValue(Xdata.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius), mPaint);
+                        if(i == clicki&&i1 == clicki1){
+                            if (XDataRingColor != null) {
+                                mPaint.setColor(XDataRingColor[i]);
+                            } else {
+                                mPaint.setColor(ringColor);
+                            }
+                            mCanvas.drawCircle(DataXY[i1], getYValue(Xdata.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius+clickWidth), mPaint);
+                            showDialog();
+                        }else{
+                            if (XDataRingColor != null) {
+                                mPaint.setColor(XDataRingColor[i]);
+                            } else {
+                                mPaint.setColor(ringColor);
+                            }
+                            mCanvas.drawCircle(DataXY[i1], getYValue(Xdata.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius), mPaint);
+                        }
                     }
                     mPaint = new Paint();
                     mPaint.setAntiAlias(true);
@@ -396,21 +599,44 @@ public class StraightLineView extends BaseDrawGridView {
             } else {
                 if (XdataDouble != null) {
                     for (int i = 0; i < XdataDouble.size(); i++) {
+                        if(isCircularLineDistance) {
+                            mPaint = new Paint();
+                            mPaint.setAntiAlias(true);
+                            for (int i1 = 0; i1 < dataSize; i1++) {
+                                if(i == clicki&&i1 == clicki1){
+                                    mPaint.setColor(Color.WHITE);
+                                    mCanvas.drawCircle(DataXY[i1], getYValue(Xdata.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius +circularLineDistance+clickWidth), mPaint);
+                                }else{
+                                    mPaint.setColor(Color.WHITE);
+                                    mCanvas.drawCircle(DataXY[i1], getYValue(Xdata.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius +circularLineDistance), mPaint);
+                                }
+                            }
+                        }
                         mPaint = new Paint();
                         mPaint.setAntiAlias(true);
-                        if (XDataRingColor != null) {
-                            mPaint.setColor(XDataRingColor[i]);
-                        } else {
-                            mPaint.setColor(ringColor);
-                        }
                         for (int i1 = 0; i1 < dataSize; i1++) {
-                            mCanvas.drawCircle(DataXY[i1], getYValue(XdataDouble.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius), mPaint);
+                            if(i == clicki&&i1 == clicki1){
+                                if (XDataRingColor != null) {
+                                    mPaint.setColor(XDataRingColor[i]);
+                                } else {
+                                    mPaint.setColor(ringColor);
+                                }
+                                mCanvas.drawCircle(DataXY[i1], getYValue(Xdata.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius+clickWidth), mPaint);
+                                showDialog();
+                            }else{
+                                if (XDataRingColor != null) {
+                                    mPaint.setColor(XDataRingColor[i]);
+                                } else {
+                                    mPaint.setColor(ringColor);
+                                }
+                                mCanvas.drawCircle(DataXY[i1], getYValue(Xdata.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius), mPaint);
+                            }
                         }
                         mPaint = new Paint();
                         mPaint.setAntiAlias(true);
                         mPaint.setColor(Color.WHITE);
                         for (int i1 = 0; i1 < dataSize; i1++) {
-                            mCanvas.drawCircle(DataXY[i1], getYValue(XdataDouble.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius - ringWidth), mPaint);
+                            mCanvas.drawCircle(DataXY[i1], getYValue(Xdata.get(i)[i1]), adaptation.setCanvasAdaptation(ringRadius - ringWidth), mPaint);
                         }
                     }
                 }
@@ -698,6 +924,103 @@ public class StraightLineView extends BaseDrawGridView {
         }
     }
 
+    /**
+     * 弹出描述
+     */
+    private void showDialog(){
+        if(XdataDetails!=null&&XdataDetails.size()==Xdata.size()){
+            s:for (int i = 0; i < Xdata.size(); i++) {
+                String[] dataDetails = XdataDetails.get(i);
+                for (int i1 = 0; i1 < dataSize; i1++) {
+                    if(i == clicki&&i1== clicki1){
+                        mPaint.setTextAlign(Paint.Align.CENTER);
+                        mPaint.setColor(Color.BLACK);
+                        mPaint.setAlpha(180);
+                        mPaint.setStyle(Paint.Style.FILL);
+                        mPaint.setStrokeWidth(1);
+                        mPaint.setTextSize(adaptation.setCanvasAdaptation(30));
+                        Rect textWH = getTextWH(dataDetails[i1], mPaint);
+                        mPaint.setStrokeWidth(5);
+                        float w = textWH.width() + adaptation.setCanvasAdaptation(100);
+                        float h = textWH.height() + adaptation.setCanvasAdaptation(60);
+                        RectF rectF = new RectF(downX - w / 2, downY - h / 2, downX + w / 2, downY + h / 2);
+                        mCanvas.drawRoundRect(rectF, 20, 20, mPaint);
+                        mPaint.setStrokeWidth(1);
+                        Paint.FontMetrics fontMetrics = mPaint.getFontMetrics();
+                        float baseline = (rectF.bottom + rectF.top - fontMetrics.bottom - fontMetrics.top) / 2;
+                        mPaint.setColor(Color.WHITE);
+                        mCanvas.drawText(dataDetails[i1], rectF.centerX(), baseline, mPaint);
+                        break s;
+                    }
+                }
+            }
+
+        }
+    }
+
+    @Override
+    protected void onTouchDown(float downX, float downY) {
+        this.downX = downX;
+        this.downY = downY;
+        touch = true;
+        if(isClick){
+            for (int i = 0; i < Xdata.size(); i++) {
+                for (int i1 = 0; i1 < dataSize; i1++) {
+                    if(isClickCircularView(downX,downY,DataXY[i1],getYValue(Xdata.get(i)[i1]),adaptation.setCanvasAdaptation(60))){
+                        clicki = i;
+                        clicki1 = i1;
+//                        Log.e("onTouchDown","点击到了 i:"+i+"  i1:"+i1);
+                        invalidate();
+                        break;
+                    }else{
+                        clicki = -1;
+                        clicki1 = -1;
+                        invalidate();
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onTouchMove(float moveX, float moveY) {
+        if(isSlideSelect){
+            if(Xdata!=null&&DataXY!=null) {
+                for (int i = 0; i < Xdata.size(); i++) {
+                    for (int i1 = 0; i1 < dataSize; i1++) {
+                        if (isClickHistogramView(moveX, moveY, DataXY[i1] - adaptation.setCanvasAdaptation(5), 0, adaptation.setCanvasAdaptation(10), mHeight)) {
+                            slideSelectIndex = i;
+                            slideSelectIndex1 = i1;
+//                        Log.e("onTouchMove","点击到了 i:"+i+"  i1:"+i1);
+                            invalidate();
+                            break;
+                        }
+                    }
+                }
+            }else{
+                if(XdataDouble!=null&&DataXY!=null) {
+                    for (int i = 0; i < XdataDouble.size(); i++) {
+                        for (int i1 = 0; i1 < dataSize; i1++) {
+                            if (isClickHistogramView(moveX, moveY, DataXY[i1] - adaptation.setCanvasAdaptation(5), 0, adaptation.setCanvasAdaptation(10), mHeight)) {
+                                slideSelectIndex = i;
+                                slideSelectIndex1 = i1;
+//                        Log.e("onTouchMove","点击到了 i:"+i+"  i1:"+i1);
+                                invalidate();
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onTouchUp(float upX, float upY) {
+        touch = false;
+        if(isSlideSelect) invalidate();
+    }
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -723,6 +1046,23 @@ public class StraightLineView extends BaseDrawGridView {
                 XdataYEndListDouble.add(XdataYEnd);
             }
         }
+    }
+
+    public interface onStraightLineViewListener{
+        void onSlideSelectListener(int xIndex,int listi,int datai,String xText,String dataText);
+    }
+
+    public void setOnStraightLineListener(onStraightLineViewListener lineListener){
+        this.mLineListener = lineListener;
+    }
+
+    /**
+     * 初始化点击选点
+     */
+    public void initClick (){
+        clicki = -1;
+        clicki1 = -1;
+        invalidate();
     }
 
     /**
@@ -768,6 +1108,14 @@ public class StraightLineView extends BaseDrawGridView {
      */
     public void setGradientColor(List<int[]> color) {
         gradientColor = color;
+    }
+    /**
+     * 设置数据渐变颜色透明度 0-255
+     *
+     * @param alpha
+     */
+    public void setGradientAlphaColor(int[] alpha) {
+        gradientColorAlpha = alpha;
     }
 
     /**
@@ -840,6 +1188,14 @@ public class StraightLineView extends BaseDrawGridView {
      */
     public void setXData(List<int[]> data) {
         Xdata = data;
+    }
+    /**
+     * 设置X轴的数据
+     *
+     * @param dataDetails
+     */
+    public void setXDataDetails(List<String[]> dataDetails) {
+        XdataDetails = dataDetails;
     }
 
     /**
@@ -1068,5 +1424,93 @@ public class StraightLineView extends BaseDrawGridView {
 
     public void setDataTextSize(int dataTextSize) {
         this.dataTextSize = dataTextSize;
+    }
+
+    public boolean isCircularLineDistance() {
+        return isCircularLineDistance;
+    }
+
+    public void setCircularLineDistance(boolean circularLineDistance) {
+        isCircularLineDistance = circularLineDistance;
+    }
+
+    public int getCircularLineDistance() {
+        return circularLineDistance;
+    }
+
+    public void setCircularLineDistance(int circularLineDistance) {
+        this.circularLineDistance = circularLineDistance;
+    }
+
+    public boolean isClick() {
+        return isClick;
+    }
+
+    public void setClick(boolean click) {
+        isClick = click;
+    }
+
+    public int getClickWidth() {
+        return clickWidth;
+    }
+
+    public void setClickWidth(int clickWidth) {
+        this.clickWidth = clickWidth;
+    }
+
+    public boolean isSlideSelect() {
+        return isSlideSelect;
+    }
+
+    public void setSlideSelect(boolean slideSelect) {
+        isSlideSelect = slideSelect;
+    }
+
+    public int getSlideSelectYColor() {
+        return slideSelectYColor;
+    }
+
+    public void setSlideSelectYColor(int slideSelectYColor) {
+        this.slideSelectYColor = slideSelectYColor;
+    }
+
+    public int getSlideSelectYWidth() {
+        return slideSelectYWidth;
+    }
+
+    public void setSlideSelectYWidth(int slideSelectYWidth) {
+        this.slideSelectYWidth = slideSelectYWidth;
+    }
+
+    public boolean isTheLastDay() {
+        return isTheLastDay;
+    }
+
+    public void setTheLastDay(boolean theLastDay) {
+        isTheLastDay = theLastDay;
+    }
+
+    public int getTheLastDayBgColor() {
+        return theLastDayBgColor;
+    }
+
+    public void setTheLastDayBgColor(int theLastDayBgColor) {
+        this.theLastDayBgColor = theLastDayBgColor;
+    }
+
+    public int getTheLastDayTextColor() {
+        return theLastDayTextColor;
+    }
+
+    public void setTheLastDayTextColor(int theLastDayTextColor) {
+        this.theLastDayTextColor = theLastDayTextColor;
+    }
+
+    public int getTheLastDayTextSieze() {
+        return theLastDayTextSieze;
+    }
+
+    public void setTheLastDayTextSieze(int theLastDayTextSieze) {
+        this.theLastDayTextSieze = theLastDayTextSieze;
     }
 }

@@ -22,6 +22,18 @@
     <uses-feature
         android:name="android.hardware.sensor.stepdetector"
         android:required="true" />
+    <!--是否作为Xposed模块-->
+    <meta-data
+        android:name="xposedmodule"
+        android:value="true" />
+    <!--描述-->
+    <meta-data
+        android:name="xposeddescription"
+        android:value="这是一个Xposed应用" />
+    <!--版本号-->
+    <meta-data
+        android:name="xposedminversion"
+        android:value="54" />
 
     <uses-permission android:name="com.lixinjia.myapplication.permission"/>
 
@@ -33,6 +45,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
+
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.ACRCloudActivity" />
         <activity android:name=".activity.CheckBoxSwitchActivity" />
         <activity android:name=".activity.TimerActivity" />
         <activity android:name=".activity.SpringIndicatorActivity" />
@@ -83,14 +105,6 @@
         <service
             android:name="com.xinjiage.stepdetector.service.StepCounterService"
             android:label="StepCounterService" />
-
-        <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <!--数据共享-->
         <provider

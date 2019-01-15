@@ -1,6 +1,7 @@
 package com.lixinjia.myapplication.activity;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -56,6 +57,12 @@ public class SummaryGraphActivity extends BaseActivity {
     }
 
 
+    public void zhexianhua(View view) {
+        zhexianhua();
+    }
+    public void zhexiandianji(View view) {
+        zhexiandianji();
+    }
     public void huan(View view) {
         huan();
     }
@@ -97,6 +104,132 @@ public class SummaryGraphActivity extends BaseActivity {
     }
 
     /**
+     * 可滑动折线有回调
+     */
+    private void zhexianhua(){
+        straightLineView = new StraightLineView(this);
+        straightLineView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, width - width / 4));
+        straightLineView.setDataXRightlength(50);
+        straightLineView.setRingRadius(1);
+        straightLineView.setRingWidth(0);
+        straightLineView.setDynamic(false);
+        straightLineView.setIsgridX(false);
+        straightLineView.setSlideSelect(true);
+        straightLineView.setTheLastDay(true);
+        straightLineView.setGridColor(Color.parseColor("#E8EAED"));
+        straightLineView.setLineColor(Color.parseColor("#04A777"));
+        straightLineView.setSlideSelectYColor(Color.parseColor("#04A777"));
+        straightLineView.setTheLastDayBgColor(Color.parseColor("#E84855"));
+        //X轴的text
+        final String[] text = new String[7];
+        text[0] = "11-12";
+        text[1] = "11-13";
+        text[2] = "11-14";
+        text[3] = "11-15";
+        text[4] = "11-16";
+        text[5] = "11-17";
+        text[6] = "11-18";
+        straightLineView.setXText(text);
+        //数据
+        final List<double[]> listdata = new ArrayList<>();
+        double[] data = new double[7];
+        data[0] = 12.0;
+        data[1] = 18;
+        data[2] = 50.55;
+        data[3] = 5;
+        data[4] = 30.5;
+        data[5] = 22.01;
+        data[6] = 48.5;
+        listdata.add(data);
+        straightLineView.setXDataDouble(listdata);
+        straightLineView.setYValueMax(adaptation.getValueMaxLargeValue(adaptation.getValueMaxMin(data).get("max")));
+        //数据对应的圆环颜色
+        int[] ringColor = new int[1];
+        ringColor[0] = Color.parseColor("#1B2845");
+        straightLineView.setXDataRingColor(ringColor);
+        straightLineView.setOnStraightLineListener(new StraightLineView.onStraightLineViewListener() {
+
+            @Override
+            public void onSlideSelectListener(int xIndex, int listi, int datai,String xText,String dataText) {
+                Log.e("onSlideSelectListener",xText+"   "+dataText);
+            }
+        });
+        linearLayout.addView(straightLineView);
+    }
+    /**
+     * 折线可点击的
+     */
+    private void zhexiandianji(){
+        straightLineView = new StraightLineView(this);
+        straightLineView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, width - width / 4));
+        straightLineView.setDataXRightlength(50);
+        straightLineView.setRingRadius(12);
+        straightLineView.setRingWidth(12);
+        straightLineView.setRing(true);
+        straightLineView.setDynamic(false);
+        straightLineView.setIsgridX(false);
+        straightLineView.setClick(true);
+        straightLineView.setCircularLineDistance(true);
+        straightLineView.setClickWidth(10);
+        //X轴的text
+        String[] text = new String[7];
+        text[0] = "11-12";
+        text[1] = "11-13";
+        text[2] = "11-14";
+        text[3] = "11-15";
+        text[4] = "11-16";
+        text[5] = "11-17";
+        text[6] = "11-18";
+        straightLineView.setXText(text);
+        //数据
+        List<int[]> listdata = new ArrayList<>();
+        int[] data = new int[7];
+        data[0] = 12;
+        data[1] = 18;
+        data[2] = 50;
+        data[3] = 5;
+        data[4] = 30;
+        data[5] = 22;
+        data[6] = 10;
+        listdata.add(data);
+        straightLineView.setXData(listdata);
+        //数据详情
+        List<String[]> listdataDetails = new ArrayList<>();
+        String[] dataDetails = new String[7];
+        dataDetails[0] = "哈哈哈";
+        dataDetails[1] = "lalaladdddddd";
+        dataDetails[2] = "嘻嘻嘻啊沙发沙发案说法";
+        dataDetails[3] = "333333";
+        dataDetails[4] = "哇哇哇";
+        dataDetails[5] = "一个人的yedd";
+        dataDetails[6] = "夜";
+        listdataDetails.add(dataDetails);
+        straightLineView.setXDataDetails(listdataDetails);
+        straightLineView.setYValueMax(adaptation.getValueMaxLargeValue(adaptation.getValueMaxMin(data).get("max")));
+        //数据渐变颜色
+        List<int[]> gradientColorList = new ArrayList<>();
+        int[] gradientColor = new int[2];
+        gradientColor[0] = Color.BLUE;
+        gradientColor[1] = Color.BLUE;
+        gradientColorList.add(gradientColor);
+        straightLineView.setGradientColor(gradientColorList);
+        //数据渐变颜色透明度
+        int[] gradientAlphaColor = new int[1];
+        gradientAlphaColor[0] = 50;
+        straightLineView.setGradientAlphaColor(gradientAlphaColor);
+        //数据颜色
+        int[] listdataColor = new int[2];
+        listdataColor[0] = Color.RED;
+        listdataColor[1] = Color.RED;
+        straightLineView.setXDataColor(listdataColor);
+        //数据对应的圆环颜色
+        int[] ringColor = new int[2];
+        ringColor[0] = Color.RED;
+        ringColor[1] = Color.RED;
+        straightLineView.setXDataRingColor(ringColor);
+        linearLayout.addView(straightLineView);
+    }
+    /**
      * 环形
      */
     private void huan() {
@@ -108,6 +241,7 @@ public class SummaryGraphActivity extends BaseActivity {
         pieChartView.setClickWidth(40);
         pieChartView.setRingDistance(2);
         pieChartView.setDataText(false);
+        pieChartView.setDescribe(true);
         String[] data = new String[4];
         data[0] = "20.5";
         data[1] = "30.8";
@@ -133,16 +267,16 @@ public class SummaryGraphActivity extends BaseActivity {
      * 横向柱状
      */
     private void hengzhuzhuang() {
-        transverseHistogramView = new TransverseHistogramView(this);
+        TransverseHistogramView transverseHistogramView = new TransverseHistogramView(this);
         transverseHistogramView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, width - width / 4));
         transverseHistogramView.setCompany("次");
         //数据
         String[] data = new String[5];
-        data[0] = "140";
+        data[0] = "2000";
         data[1] = "200";
         data[2] = "400";
         data[3] = "500";
-        data[4] = "600";
+        data[4] = "5";
         transverseHistogramView.setXData(data);
         transverseHistogramView.setxValueMax(adaptation.getValueMaxLargeValue(adaptation.getValueMaxMin(data).get("max")));
         //描述
@@ -155,20 +289,12 @@ public class SummaryGraphActivity extends BaseActivity {
         transverseHistogramView.setXText(text);
         //柱体颜色
         String[] color = new String[5];
-        color[0] = "#CDEDE4";
-        color[1] = "#FADADD";
-        color[2] = "#CDEDE4";
-        color[3] = "#FADADD";
-        color[4] = "#CDEDE4";
+        color[0] = "#04A777";
+        color[1] = "#E84855";
+        color[2] = "#04A777";
+        color[3] = "#E84855";
+        color[4] = "#04A777";
         transverseHistogramView.setColors(color);
-        //柱体边框颜色
-        String[] borderColor = new String[5];
-        borderColor[0] = "#04A777";
-        borderColor[1] = "#E84855";
-        borderColor[2] = "#04A777";
-        borderColor[3] = "#E84855";
-        borderColor[4] = "#04A777";
-        transverseHistogramView.setBorderColors(borderColor);
         transverseHistogramView.setDataText(true);
         linearLayout.addView(transverseHistogramView);
     }

@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/library_ACRCloud" />
             <option value="$PROJECT_DIR$/library_BGABadgeView" />
             <option value="$PROJECT_DIR$/library_LRecyclerview" />
             <option value="$PROJECT_DIR$/library_banner1.4.10" />
