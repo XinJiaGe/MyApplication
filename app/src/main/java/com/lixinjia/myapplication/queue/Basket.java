@@ -17,7 +17,7 @@ public class Basket {
     // 篮子，能够容纳3个苹果
     BlockingQueue<String> basket = new ArrayBlockingQueue<String>(3);
 
-    // 生产苹果，放入篮子
+    // 生产苹果，放入篮子 
     public void produce() throws InterruptedException{
         // put方法放入一个苹果，若basket满了，等到basket有位置
         basket.put("An apple");

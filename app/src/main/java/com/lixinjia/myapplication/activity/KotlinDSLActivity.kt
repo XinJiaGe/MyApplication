@@ -34,7 +34,7 @@ class KotlinDSLActivity : BaseKotlinActivity() {
         mTitle?.setCenterText("DSL布局")
     }
 
-    fun createView(context: Context): View {
+    private fun createView(context: Context): View {
         return context.verticalLayout{
             button1 = button("1"){
                 id = R.id.actKotlinDSLBt1

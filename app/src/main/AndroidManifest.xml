@@ -54,6 +54,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.KotlinActivity" />
+        <activity android:name=".activity.FingerprintActivity" />
+        <activity android:name=".activity.LockActivity" />
         <activity android:name=".activity.ACRCloudActivity" />
         <activity android:name=".activity.CheckBoxSwitchActivity" />
         <activity android:name=".activity.TimerActivity" />
@@ -76,7 +79,7 @@
             android:screenOrientation="landscape" />
         <activity android:name="io.card.payment.CardIOActivity"
             android:configChanges="keyboardHidden|orientation" />
-        <activity android:name=".activity.KotlinActivity" />
+        <activity android:name=".activity.KotlinTvActivity" />
         <activity android:name=".activity.EventBusTextActivity" />
         <activity android:name=".activity.EventBusTextNextActivity" />
         <activity android:name=".activity.KotlinDSLActivity" />
