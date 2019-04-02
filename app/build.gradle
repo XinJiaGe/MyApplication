@@ -104,10 +104,10 @@ dependencies {
     //CheckBox切换 SwitchButton
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     implementation project(':library_jia')
-    implementation project(':library_calendar')
     implementation project(':library_utilcode')
     implementation project(':library_drawable')
     implementation project(':library_ACRCloud')
+    implementation project(':library_CollapseCalendarView')
 }
 repositories {
     mavenCentral()

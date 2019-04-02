@@ -44,13 +44,13 @@ public class MainActivity extends BaseActivity {
         list.add(new MainEntity().setName("表情").setClz(ExpressionActivity.class));
         list.add(new MainEntity().setName("OkHttp").setClz(OkHttpActivity.class));
         list.add(new MainEntity().setName("消息红点").setClz(MessageRedPointActivity.class));
-//        list.add(new MainEntity().setName("日历").setClz(CalendarActivity.class));
+        list.add(new MainEntity().setName("日历").setClz(CalendarActivity.class));
         list.add(new MainEntity().setName("银行卡扫描").setClz(BankCardScanningActivity.class));
         list.add(new MainEntity().setName("讯飞服务").setClz(XunFeiActivity.class));
+        list.add(new MainEntity().setName("轮播").setClz(BannerActivity.class));
         list.add(new MainEntity().setName("相册拍照图片").setClz(PhotoAlbumPhotoActivity.class));
 //        list.add(new MainEntity().setName("aidi").setClz(AidiActivity.class));
 //        list.add(new MainEntity().setName("Messenger").setClz(MessengerActivity.class));
-        list.add(new MainEntity().setName("轮播").setClz(BannerActivity.class));
         list.add(new MainEntity().setName("蓝牙控制").setClz(BluetoothControlActivity.class));
         list.add(new MainEntity().setName("富文本编辑器").setClz(RichTextActivity.class));
         list.add(new MainEntity().setName("xml提取").setClz(XmlExtractActivity.class));
