@@ -56,6 +56,7 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.AnnotationActivity" />
         <activity android:name=".activity.MediaRecorderActivity" />
         <activity android:name=".activity.AudioRecordActivity" />
         <activity android:name=".activity.RecordingActivity" />

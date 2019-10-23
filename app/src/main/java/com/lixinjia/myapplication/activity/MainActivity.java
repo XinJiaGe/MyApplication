@@ -63,6 +63,7 @@ public class MainActivity extends BaseActivity {
         list.add(new MainEntity().setName("计时器动画").setClz(TimerActivity.class));
         list.add(new MainEntity().setName("ACRCloud").setClz(ACRCloudActivity.class));
         list.add(new MainEntity().setName("录音").setClz(RecordingActivity.class));
+        list.add(new MainEntity().setName("注解").setClz(AnnotationActivity.class));
         MainAdapter adapter = new MainAdapter(list, mActivity);
         horizontal.setALine(false);
         horizontal.setAdapter(adapter);
