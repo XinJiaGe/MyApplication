@@ -53,8 +53,8 @@ dependencies {
     //魅族指纹识别
     compile files('libs/fingerprint.jar')
 
-    //kotlin
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+//    //kotlin
+//    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:1.3.41"
 
     //EventBus
     compile files('libs/eventbus-1.5-src-modify.jar')
