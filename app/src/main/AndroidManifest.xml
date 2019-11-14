@@ -16,7 +16,6 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
     <uses-feature
         android:name="android.hardware.sensor.stepcounter"
         android:required="true" />
@@ -56,6 +55,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.InvocationHandlerActivity" />
+        <activity android:name=".activity.ReflectionActivity" />
+        <activity android:name=".activity.ImActivity" />
         <activity android:name=".activity.AnnotationActivity" />
         <activity android:name=".activity.MediaRecorderActivity" />
         <activity android:name=".activity.AudioRecordActivity" />

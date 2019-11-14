@@ -83,7 +83,7 @@ class ExpressionActivity : BaseKotlinActivity() {
         gridView.onItemClick { adapterView, view, i, l ->
             var bitmap: Bitmap? = null
             bitmap = BitmapFactory.decodeResource(resources, imageIds[i % imageIds.size])
-            val imageSpan = ImageSpan(mActivity, bitmap)
+            val imageSpan = mActivity?.let { ImageSpan(it, bitmap) }
             var str: String? = null
             if (i < 10) {
                 str = "f00" + i

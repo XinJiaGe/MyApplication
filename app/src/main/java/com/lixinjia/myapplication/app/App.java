@@ -13,6 +13,7 @@ import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.iflytek.cloud.SpeechUtility;
+import com.jiage.library_im.client.Client;
 import com.lixinjia.myapplication.utils.SDToast;
 import com.sunday.eventbus.SDEventManager;
 import com.xinjiage.stepdetector.StepDetector;
@@ -71,6 +72,8 @@ public class App extends MultiDexApplication {
         x.Ext.setDebug(isDebug); //输出debug日志，开启会影响性能
         //初始化环形
         initHuanXin();
+        //初始化IM
+        Client.getInstance().init(this);
     }
 
     /**

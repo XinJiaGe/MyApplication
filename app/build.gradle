@@ -1,14 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
 android {
-    compileSdkVersion 27
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 29
+    buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.lixinjia.myapplication"
-        minSdkVersion 15
-        targetSdkVersion 27
+        minSdkVersion 23
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -30,77 +29,62 @@ android {
             path "CMakeLists.txt"
         }
     }
-}
 
+    packagingOptions {
+        exclude 'META-INF/INDEX.LIST'
+    }
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+}
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'org.jetbrains.anko:anko-sdk15:0.9'
-    compile 'org.jetbrains.anko:anko-support-v4:0.9'
-    compile 'org.jetbrains.anko:anko-appcompat-v7:0.9'
-    compile 'com.android.support:design:27.1.1'
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:27.1.1'
-
+    implementation 'org.jetbrains.anko:anko-sdk15:0.9'
+    implementation 'org.jetbrains.anko:anko-support-v4:0.9'
+    implementation 'org.jetbrains.anko:anko-appcompat-v7:0.9'
+    implementation 'com.android.support:design:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
     //处理方法超过64K
     implementation 'com.android.support:multidex:1.0.3'
-
     //屏幕适配
-    compile 'com.zhy:autolayout:1.4.5'
-
+    implementation 'com.zhy:autolayout:1.4.5'
     //魅族指纹识别
-    compile files('libs/fingerprint.jar')
-
+    implementation files('libs/fingerprint.jar')
 //    //kotlin
 //    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:1.3.41"
-
     //EventBus
-    compile files('libs/eventbus-1.5-src-modify.jar')
-
+    implementation files('libs/eventbus-1.5-src-modify.jar')
     //OkHttp
-    compile 'com.squareup.okhttp3:okhttp:3.10.0'
-
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     //银行卡扫描
-    compile 'io.card:android-sdk:5.4.2'
-
+    implementation 'io.card:android-sdk:5.4.2'
     //富文本编辑器
-    compile 'jp.wasabeef:richeditor-android:1.2.2'
-
+    implementation 'jp.wasabeef:richeditor-android:1.2.2'
     //上下滚动
     implementation 'com.sunfusheng:marqueeview:1.3.3'
-
     //Recyclerview
     implementation project(':library_LRecyclerview')
-
     //计步
-    compile project(':library_stepdetector')
-
+    implementation project(':library_stepdetector')
     //消息点
     implementation project(':library_BGABadgeView')
-
     //xutils3
     implementation project(':library_xutils3.3.40')
-
     //RxJava
-    compile 'io.reactivex.rxjava2:rxjava:2.1.1'
-
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.1'
     //轮播
     implementation project(':library_banner1.4.10')
-
     //讯飞
     implementation project(':library_xunfei')
-
     //环信
     implementation project(':library_huanxing3.5.1')
-
     //切换动画  SpringIndicator
     implementation 'com.github.chenupt.android:springindicator:1.0.2@aar'
-
     //炫酷计时器
     implementation 'com.jiahuan.timelyanimation:timelyanimation:0.5.0@aar'
-
     //CheckBox切换 SwitchButton
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     implementation project(':library_jia')
@@ -108,6 +92,7 @@ dependencies {
     implementation project(':library_drawable')
     implementation project(':library_ACRCloud')
     implementation project(':library_CollapseCalendarView')
+    implementation project(':MyApplication-library_im')
 }
 repositories {
     mavenCentral()

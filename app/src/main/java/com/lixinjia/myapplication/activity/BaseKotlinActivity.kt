@@ -193,7 +193,9 @@ abstract class BaseKotlinActivity : AutoLayoutActivity(), View.OnClickListener, 
     fun startActivity(clz: Class<*>, bundle: Bundle?) {
         val intent = Intent()
         intent.setClass(this, clz)
-        intent.putExtras(bundle)
+        if (bundle != null) {
+            intent.putExtras(bundle)
+        }
         startActivity(intent)
     }
 
@@ -208,7 +210,9 @@ abstract class BaseKotlinActivity : AutoLayoutActivity(), View.OnClickListener, 
     fun startActivityForResult(cls: Class<*>, bundle: Bundle?, requestCode: Int) {
         val intent = Intent()
         intent.setClass(this, cls)
-        intent.putExtras(bundle)
+        if (bundle != null) {
+            intent.putExtras(bundle)
+        }
         startActivityForResult(intent, requestCode)
     }
 
